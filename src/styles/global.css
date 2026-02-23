@@ -1,14 +1,5 @@
 @import "tailwindcss";
 
-/* ─── Fonts ─── */
-@font-face {
-  font-family: "Bricolage Grotesque";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap");
-}
-
 /* ─── Theme Tokens ─── */
 @theme {
   /* Brand colors */
@@ -22,6 +13,7 @@
   --color-brand-700: #183f2e;
   --color-brand-800: #113120;
   --color-brand-900: #0a2316;
+  --color-brand-accent: #079455;
 
   /* Neutral colors */
   --color-neutral-25: #fcfcfd;
@@ -43,6 +35,7 @@
   --color-text-quaternary: #717680;
   --color-text-on-brand: #ffffff;
   --color-text-on-brand-secondary: #849a8d;
+  --color-text-on-brand-tertiary: #9fb1a5;
   --color-text-brand-secondary: #183f2e;
 
   /* Backgrounds */
@@ -52,6 +45,9 @@
   --color-bg-quaternary: #e9eaeb;
   --color-bg-brand-solid: #183f2e;
   --color-bg-brand-dark: #113120;
+
+  /* Detail visual */
+  --color-detail-visual-bg: #4e6d5d;
 
   /* Border */
   --color-border-primary: #d5d7da;
@@ -69,10 +65,12 @@
   --radius-xl: 12px;
   --radius-2xl: 16px;
   --radius-3xl: 20px;
+  --radius-4xl: 24px;
 
   /* Fonts */
   --font-display: "Bricolage Grotesque", serif;
   --font-body: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", monospace;
 
   /* Container */
   --container-padding-desktop: 32px;
@@ -83,11 +81,114 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
   body {
     font-family: var(--font-body);
     color: var(--color-text-primary);
     background-color: var(--color-bg-brand-dark);
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
+
+  body.loaded {
+    opacity: 1;
+  }
+}
+
+/* ─── Header Scroll State ─── */
+.header-scrolled {
+  background: rgba(17, 49, 32, 0.85) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* ─── Dropdown Panel Hover ─── */
+.nav-dropdown .dropdown-panel {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  pointer-events: none;
+}
+
+.nav-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* ─── Hero Fixed + Parallax ─── */
+.hero-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: visible;
+  padding: 8px 16px 0;
+  padding-top: 80px;
+  z-index: 0;
+}
+
+.hero-spacer {
+  position: relative;
+  pointer-events: none;
+}
+
+/* ─── Features Solid Background ─── */
+.features-solid-bg {
+  background: var(--color-bg-brand-dark) !important;
+}
+
+/* ─── Isometric 3D Card Transforms ─── */
+.iso-stack {
+  perspective: 800px;
+}
+
+.iso-card {
+  transform: rotateX(15deg) rotateY(-30deg);
+}
+
+.iso-card-1 {
+  transform: translateX(-50%) rotateX(15deg) rotateY(-30deg);
+}
+
+/* ─── Desktop Mockup ─── */
+.desktop-screen {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  right: -40px;
+  bottom: -40px;
+}
+
+.desktop-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  border-radius: 12px 0 0 0;
+  box-shadow: -8px -8px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* ─── Phone Mockups ─── */
+.phone-back {
+  left: 15%;
+  top: 50%;
+  transform: translateY(-55%);
+}
+
+.phone-front {
+  right: 15%;
+  top: 50%;
+  transform: translateY(-45%);
+}
+
+/* ─── Catalog Item ─── */
+.catalog-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

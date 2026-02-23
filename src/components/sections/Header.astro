@@ -1,0 +1,83 @@
+---
+import Logo from "@/components/ui/Logo.astro";
+import ChevronDown from "@/components/ui/ChevronDown.astro";
+import { navItems as localNavItems, isDropdown } from "@/lib/navigation";
+import type { NavItem } from "@/lib/navigation";
+
+interface Props {
+  navItems?: any[];
+}
+
+const { navItems: navItemsProp } = Astro.props;
+
+// Resolve nav items: Sanity data or local fallback
+// Sanity nav items come as { label, href?, children?, wide? }
+// Local nav items use the NavItem type (NavLink | NavDropdown)
+const items = navItemsProp?.length ? navItemsProp : localNavItems;
+
+function hasChildren(item: any): boolean {
+  return "items" in item || "children" in item;
+}
+
+function getChildren(item: any): any[] {
+  return item.items || item.children || [];
+}
+
+function isWide(item: any): boolean {
+  return !!item.wide;
+}
+---
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-100 h-20 flex items-center justify-center bg-transparent transition-all duration-300">
+  <div class="w-full max-w-[1600px] px-8 flex items-center justify-between relative">
+    <!-- Logo -->
+    <a href="/" class="flex items-start h-8 pb-2">
+      <Logo />
+    </a>
+
+    <!-- Nav (desktop) -->
+    <nav class="fixed left-1/2 top-0 h-20 -translate-x-1/2 hidden lg:flex items-center gap-2 z-101">
+      {items.map((item: any) =>
+        hasChildren(item) ? (
+          <div class="nav-dropdown relative">
+            <button class="flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 text-white/70 rounded-md transition-all duration-150 hover:bg-white/10 hover:text-white">
+              <span class="px-0.5">{item.label}</span>
+              <ChevronDown />
+            </button>
+            <div class:list={[
+              "dropdown-panel absolute top-full left-1/2 -translate-x-1/2 bg-[rgba(17,49,32,0.95)] backdrop-blur-[16px] border border-white/10 rounded-xl p-2 flex flex-col",
+              isWide(item) ? "min-w-[360px]" : "min-w-[240px]"
+            ]}>
+              {getChildren(item).map((link: any) => (
+                <a href={link.href || "#"} class="flex flex-col gap-1 px-3 py-2.5 rounded-md text-white/80 text-sm font-medium leading-5 transition-all duration-150 hover:bg-white/10 hover:text-white">
+                  {link.description ? (
+                    <>
+                      <strong class="font-semibold text-white text-sm leading-5">{link.label}</strong>
+                      <span class="text-[13px] font-normal leading-[18px] text-white/50">{link.description}</span>
+                    </>
+                  ) : (
+                    link.label
+                  )}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a href={item.href || "#"} class="flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 text-white/70 rounded-md transition-all duration-150 hover:bg-white/10 hover:text-white">
+            <span class="px-0.5">{item.label}</span>
+          </a>
+        )
+      )}
+    </nav>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3">
+      <button class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white/10 border border-white/20 text-white hover:bg-white/[0.18]">
+        Log in
+      </button>
+      <button class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white text-brand-700 hover:bg-white/90">
+        Sign up
+      </button>
+    </div>
+  </div>
+</header>

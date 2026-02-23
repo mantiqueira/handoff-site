@@ -1,0 +1,61 @@
+---
+import StarIcon from "@/components/ui/StarIcon.astro";
+import Button from "@/components/ui/Button.astro";
+import avatarLocal from "@/assets/images/testimonial-avatar.png";
+
+interface Props {
+  testimonial?: any;
+}
+
+const { testimonial } = Astro.props;
+
+const avatarSrc = testimonial?.avatar?.asset?.url ?? avatarLocal.src;
+const name = testimonial?.name ?? "Benjamin B.";
+const role = testimonial?.role ?? "Acting Construction Manager";
+const source = testimonial?.source ?? "G2 review";
+const rating = testimonial?.rating ?? 5;
+const quote = testimonial?.quote ?? "Handoff has turned 3-hour estimates into 20-minute estimates ... I give a project scope, any plans and pictures, and it creates the entire estimate for me.";
+const highlightText = testimonial?.highlightText ?? "3-hour estimates into 20-minute estimates";
+
+// Build the quote with highlight
+const parts = highlightText && quote.includes(highlightText)
+  ? [
+      quote.substring(0, quote.indexOf(highlightText)),
+      highlightText,
+      quote.substring(quote.indexOf(highlightText) + highlightText.length),
+    ]
+  : [quote];
+---
+
+<div class="bg-bg-secondary rounded-xl p-8 lg:p-12 flex flex-col gap-8 mx-6 lg:mx-8 -mt-12 max-w-[calc(1440px-64px)] w-[calc(100%-48px)] lg:w-[calc(100%-64px)] self-center" data-animate="fade-up">
+  <!-- Header -->
+  <div class="flex items-center gap-4">
+    <div class="w-6 h-6 rounded-full overflow-hidden">
+      <img src={avatarSrc} alt={name} class="w-full h-full object-cover" />
+    </div>
+    <div class="flex gap-1">
+      {Array.from({ length: rating }).map(() => <StarIcon />)}
+    </div>
+    <span class="text-base font-medium text-text-quaternary">{rating}/5</span>
+  </div>
+
+  <!-- Quote -->
+  <blockquote class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary">
+    {parts.length === 3 ? (
+      <Fragment>
+        {parts[0]}<span class="text-brand-accent">{parts[1]}</span>{parts[2]}
+      </Fragment>
+    ) : (
+      quote
+    )}
+  </blockquote>
+
+  <!-- Footer -->
+  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-16">
+    <div class="flex flex-col gap-1">
+      <p class="text-lg font-semibold leading-7 text-text-primary">— {name}</p>
+      <p class="text-base font-normal leading-6 text-text-tertiary">{role} • {source}</p>
+    </div>
+    <Button variant="secondary-outline">View more testimonials</Button>
+  </div>
+</div>

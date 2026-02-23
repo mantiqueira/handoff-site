@@ -1,0 +1,81 @@
+---
+import BulletIcon from "@/components/ui/BulletIcon.astro";
+import Button from "@/components/ui/Button.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  bullets: string[];
+  reverse?: boolean;
+  visualType: "desktop" | "phones" | "isometric";
+  visualImages?: ImageMetadata[];
+  imageUrls?: string[];
+}
+
+const { eyebrow, title, description, bullets, reverse = false, visualType, visualImages, imageUrls } = Astro.props;
+
+// Resolve image sources: prefer imageUrls (Sanity), fallback to visualImages (local)
+const images: string[] = imageUrls?.length
+  ? imageUrls
+  : (visualImages || []).map((img) => img.src);
+---
+
+<div class:list={[
+  "max-w-[1440px] mx-auto px-6 lg:px-8 w-full flex flex-col lg:flex-row items-stretch gap-12 lg:gap-24",
+  reverse && "lg:flex-row-reverse"
+]} data-animate="fade-up">
+  <!-- Text -->
+  <div class="flex-1 flex flex-col gap-0 py-6 min-w-0">
+    <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-quaternary mb-3">
+      {eyebrow}
+    </p>
+    <h3 class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary mb-5">
+      {title}
+    </h3>
+    <p class="text-xl font-medium leading-[30px] text-text-tertiary">
+      {description}
+    </p>
+    <ul class="flex flex-col gap-4 mt-auto">
+      {bullets.map((b) => (
+        <li class="flex items-start gap-2 text-lg font-medium leading-7 text-text-quaternary">
+          <BulletIcon />
+          {b}
+        </li>
+      ))}
+    </ul>
+    <div class="mt-8">
+      <Button variant="secondary-outline">Get started</Button>
+    </div>
+  </div>
+
+  <!-- Visual -->
+  <div class="flex-1 min-w-0 rounded-xl overflow-hidden h-[400px] lg:h-[512px] bg-detail-visual-bg relative">
+    {visualType === "desktop" && images[0] && (
+      <div class="w-full h-full relative overflow-hidden">
+        <div class="desktop-screen">
+          <img src={images[0]} alt="Dashboard screenshot" />
+        </div>
+      </div>
+    )}
+
+    {visualType === "phones" && images[0] && (
+      <div class="relative w-full h-full flex items-center justify-center">
+        <div class="absolute w-[220px] h-[440px] rounded-3xl overflow-hidden shadow-[0_24px_48px_-12px_rgba(0,0,0,0.2)] z-[1] phone-back">
+          <img src={images[0]} alt="Phone screen" class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute w-[220px] h-[440px] rounded-3xl overflow-hidden shadow-[0_24px_48px_-12px_rgba(0,0,0,0.2)] z-[2] phone-front">
+          <img src={images[0]} alt="Phone screen" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    )}
+
+    {visualType === "isometric" && images.length >= 3 && (
+      <div class="relative w-full h-full flex items-center justify-center iso-stack">
+        <img src={images[0]} alt="" class="absolute w-[280px] h-auto top-10 left-1/2 iso-card-1 z-[3] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" />
+        <img src={images[1]} alt="" class="absolute w-[240px] h-auto top-[120px] right-0 iso-card z-[2] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" />
+        <img src={images[2]} alt="" class="absolute w-[220px] h-auto bottom-10 left-5 iso-card z-[1] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" />
+      </div>
+    )}
+  </div>
+</div>

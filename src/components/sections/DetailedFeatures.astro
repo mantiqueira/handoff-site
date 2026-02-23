@@ -1,0 +1,123 @@
+---
+import DetailRow from "./DetailRow.astro";
+import desktopMockupLocal from "@/assets/images/desktop-mockup.png";
+import phoneScreenLocal from "@/assets/images/phone-screen.png";
+import isoCard1Local from "@/assets/images/iso-card-1.png";
+import isoCard2Local from "@/assets/images/iso-card-2.png";
+import isoCard3Local from "@/assets/images/iso-card-3.png";
+
+interface Props {
+  detailRows?: any[];
+}
+
+const { detailRows } = Astro.props;
+
+const localRows = [
+  {
+    eyebrow: "Lead intake & pipeline",
+    title: "Never lose an opportunity",
+    description: "Walk the job site, snap photos, talk into your phone, done. Every detail gets captured, even when you're juggling ten different jobs.",
+    bullets: [
+      "Your phone becomes your intake system",
+      "Every photo, video, and note is automatically organized",
+      "See all your leads at a glance, know exactly where each one stands",
+    ],
+    reverse: false,
+    visualType: "desktop" as const,
+    visualImages: [desktopMockupLocal],
+  },
+  {
+    eyebrow: "Rapid AI estimating",
+    title: "Go from site visit to estimate, fast",
+    description: "Stop spending your evenings on estimates. Start your walkthrough, describe what you see, take photos, and get a complete estimate before you're back in your truck.",
+    bullets: [
+      "Uses your pricing rules, not generic markup",
+      "Applies material costs from actual suppliers in your area",
+      "Trained on 100,000+ real contractor data",
+    ],
+    reverse: true,
+    visualType: "phones" as const,
+    visualImages: [phoneScreenLocal],
+  },
+  {
+    eyebrow: "Automated professional proposals",
+    title: "Turn estimates into branded proposal with one click",
+    description: "While your competition is still figuring out their pricing, you're already in the client's inbox.",
+    bullets: [
+      "Detailed professional proposals that wow your clients",
+      "Your branding, your pricing, and your way of doing business",
+    ],
+    reverse: false,
+    visualType: "isometric" as const,
+    visualImages: [isoCard1Local, isoCard2Local, isoCard3Local],
+  },
+  {
+    eyebrow: "Automated follow-up",
+    title: "Keep every lead warm",
+    description: "Never let a good lead go cold because you forgot to follow up. AI handles that, so you can focus on the work that pays.",
+    bullets: [
+      "Follow-ups happen automatically with email and SMS",
+      "Get alerts when clients are viewing your proposals",
+      "Turn more leads into signed proposals",
+    ],
+    reverse: true,
+    visualType: "phones" as const,
+    visualImages: [phoneScreenLocal],
+  },
+  {
+    eyebrow: "Consistent pricing systems",
+    title: "Works for small jobs and big ones",
+    description: "From a bathroom repair to a full kitchen remodel, Handoff handles it. Combine rooms, separate labor and materials, and manage markups at every level, all in one place.",
+    bullets: [
+      "Works for a single bathroom or a full home remodel",
+      "Separate labor and materials or keep them combined, your call",
+      "Manage markups at the line, room, or job level",
+    ],
+    reverse: false,
+    visualType: "isometric" as const,
+    visualImages: [isoCard1Local, isoCard2Local, isoCard3Local],
+  },
+];
+
+// Use Sanity data if available, otherwise fallback
+const rows = detailRows?.length
+  ? detailRows.map((r: any) => ({
+      eyebrow: r.eyebrow,
+      title: r.title,
+      description: r.description,
+      bullets: r.bullets || [],
+      reverse: r.reverse ?? false,
+      visualType: r.visualType as "desktop" | "phones" | "isometric",
+      imageUrls: (r.images || []).map((img: any) => img?.asset?.url).filter(Boolean),
+    }))
+  : null;
+---
+
+<section class="relative z-[2] px-4 pb-2 bg-brand-800">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+    {rows
+      ? rows.map((r: any) => (
+          <DetailRow
+            eyebrow={r.eyebrow}
+            title={r.title}
+            description={r.description}
+            bullets={r.bullets}
+            reverse={r.reverse}
+            visualType={r.visualType}
+            imageUrls={r.imageUrls}
+          />
+        ))
+      : localRows.map((r) => (
+          <DetailRow
+            eyebrow={r.eyebrow}
+            title={r.title}
+            description={r.description}
+            bullets={r.bullets}
+            reverse={r.reverse}
+            visualType={r.visualType}
+            visualImages={r.visualImages}
+          />
+        ))
+    }
+  </div>
+</section>

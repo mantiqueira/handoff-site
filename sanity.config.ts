@@ -1,6 +1,8 @@
 import { defineConfig, type Template } from "sanity";
 import { structureTool } from "sanity/structure";
+import { presentationTool } from "sanity/presentation";
 import { schemaTypes } from "./src/schemas";
+import { resolve } from "./src/lib/resolve";
 
 const singletonTypes = new Set([
   "heroSection",
@@ -63,6 +65,12 @@ export default defineConfig({
                 !["page", "blogPost"].includes(item.getId()!),
             ),
           ]),
+    }),
+    presentationTool({
+      resolve,
+      previewUrl: {
+        initial: location.origin,
+      },
     }),
   ],
   schema: {

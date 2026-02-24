@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import sanity from '@sanity/astro';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 
 const sanityProjectId = process.env.SANITY_PROJECT_ID || 'fuq5va06';
 
@@ -11,7 +11,7 @@ const sanityProjectId = process.env.SANITY_PROJECT_ID || 'fuq5va06';
 export default defineConfig({
   site: 'https://handoff.ai',
   output: 'static',
-  adapter: node({ mode: 'standalone' }),
+  adapter: vercel(),
   vite: {
     plugins: [tailwindcss()],
     resolve: {

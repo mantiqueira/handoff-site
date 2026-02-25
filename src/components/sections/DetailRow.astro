@@ -10,15 +10,11 @@ interface Props {
   reverse?: boolean;
   visualType: "desktop" | "phones" | "isometric";
   visualImages?: ImageMetadata[];
-  imageUrls?: string[];
 }
 
-const { eyebrow, title, description, bullets, reverse = false, visualType, visualImages, imageUrls } = Astro.props;
+const { eyebrow, title, description, bullets, reverse = false, visualType, visualImages } = Astro.props;
 
-// Resolve image sources: prefer imageUrls (Sanity), fallback to visualImages (local)
-const images: string[] = imageUrls?.length
-  ? imageUrls
-  : (visualImages || []).map((img) => img.src);
+const images: string[] = (visualImages || []).map((img) => img.src);
 ---
 
 <div class:list={[

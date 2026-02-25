@@ -2,119 +2,65 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
-import RichTextSection from "@/components/sections/RichTextSection.astro";
-import { client } from "@/lib/sanity";
-import {
-  navItems as localNavItems,
-  footerColumns as localFooterColumns,
-} from "@/lib/navigation";
+import { navItems, footerColumns } from "@/lib/navigation";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await client.fetch(
-    `*[_type == "blogPost" && defined(slug.current)]{
-      "slug": slug.current
-    }`,
-  );
-
-  return posts.map((p: any) => ({
-    params: { slug: p.slug },
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
   }));
 }
 
-const { slug } = Astro.params;
+const { post } = Astro.props;
+const { Content } = await render(post);
 
-const post = await client.fetch(
-  `*[_type == "blogPost" && slug.current == $slug][0]{
-    title, author, publishedAt, excerpt,
-    featuredImage{ asset->{url} },
-    body[]{ ..., asset->{url} }
-  }`,
-  { slug },
-);
-
-if (!post) {
-  return Astro.redirect("/404");
-}
-
-// Fetch global chrome
-let navItems: any[] = [];
-let footerColumns: any[] = [];
-
-try {
-  [navItems, footerColumns] = await Promise.all([
-    client.fetch(`*[_type == "navItem"] | order(order asc){
-      label, href, wide, children[]{ label, href, description }
-    }`),
-    client.fetch(`*[_type == "footerColumn"] | order(order asc){
-      title, lightTitle, links[]{ label, href }
-    }`),
-  ]);
-} catch (e) {
-  console.warn("Sanity fetch failed for global chrome:", e);
-}
-
-const resolvedNavItems = navItems?.length
-  ? navItems.map((n: any) =>
-      n.children?.length
-        ? { label: n.label, items: n.children, wide: n.wide }
-        : { label: n.label, href: n.href || "#" },
-    )
-  : localNavItems;
-
-const resolvedFooterColumns = footerColumns?.length
-  ? footerColumns.map((c: any) => ({
-      title: c.title,
-      lightTitle: c.lightTitle,
-      links: c.links || [],
-    }))
-  : localFooterColumns;
-
-const publishedDate = post.publishedAt
-  ? new Date(post.publishedAt).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
-  : null;
+const publishedDate = post.data.publishedAt.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 ---
 
 <BaseLayout
-  title={`${post.title} — Handoff Blog`}
-  description={post.excerpt}
+  title={`${post.data.title} — Handoff Blog`}
+  description={post.data.excerpt}
 >
-  <Header navItems={resolvedNavItems} />
+  <Header navItems={navItems} />
 
   <article class="relative z-[2] pt-32 pb-2 px-4 bg-brand-800">
     <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden">
       <div class="max-w-[800px] mx-auto px-6 lg:px-8">
-        <!-- Post header -->
         <header class="mb-12">
           <h1 class="font-display text-4xl lg:text-5xl font-medium leading-tight tracking-[-0.96px] text-text-primary mb-6">
-            {post.title}
+            {post.data.title}
           </h1>
-          {(post.author || publishedDate) && (
+          {(post.data.author || publishedDate) && (
             <p class="text-lg text-text-tertiary">
-              {post.author && <span class="font-medium">{post.author}</span>}
-              {post.author && publishedDate && <span> &middot; </span>}
-              {publishedDate && <time>{publishedDate}</time>}
+              {post.data.author && <span class="font-medium">{post.data.author}</span>}
+              {post.data.author && publishedDate && <span> &middot; </span>}
+              <time>{publishedDate}</time>
             </p>
           )}
         </header>
 
-        {post.featuredImage?.asset?.url && (
+        {post.data.featuredImage && (
           <img
-            src={post.featuredImage.asset.url}
-            alt={post.title}
+            src={post.data.featuredImage}
+            alt={post.data.title}
             class="w-full rounded-xl mb-12"
           />
         )}
+
+        <div class="prose prose-lg max-w-none">
+          <Content />
+        </div>
       </div>
     </div>
   </article>
 
-  {post.body?.length && <RichTextSection body={post.body} />}
-
-  <Footer columns={resolvedFooterColumns} />
+  <Footer columns={footerColumns} />
 </BaseLayout>
 
 <script>

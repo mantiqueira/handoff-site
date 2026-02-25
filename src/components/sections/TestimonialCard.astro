@@ -1,23 +1,16 @@
 ---
 import StarIcon from "@/components/ui/StarIcon.astro";
 import Button from "@/components/ui/Button.astro";
-import avatarLocal from "@/assets/images/testimonial-avatar.png";
+import avatar from "@/assets/images/testimonial-avatar.png";
 
-interface Props {
-  testimonial?: any;
-}
+const avatarSrc = avatar.src;
+const name = "Benjamin B.";
+const role = "Acting Construction Manager";
+const source = "G2 review";
+const rating = 5;
+const quote = "Handoff has turned 3-hour estimates into 20-minute estimates ... I give a project scope, any plans and pictures, and it creates the entire estimate for me.";
+const highlightText = "3-hour estimates into 20-minute estimates";
 
-const { testimonial } = Astro.props;
-
-const avatarSrc = testimonial?.avatar?.asset?.url ?? avatarLocal.src;
-const name = testimonial?.name ?? "Benjamin B.";
-const role = testimonial?.role ?? "Acting Construction Manager";
-const source = testimonial?.source ?? "G2 review";
-const rating = testimonial?.rating ?? 5;
-const quote = testimonial?.quote ?? "Handoff has turned 3-hour estimates into 20-minute estimates ... I give a project scope, any plans and pictures, and it creates the entire estimate for me.";
-const highlightText = testimonial?.highlightText ?? "3-hour estimates into 20-minute estimates";
-
-// Build the quote with highlight
 const parts = highlightText && quote.includes(highlightText)
   ? [
       quote.substring(0, quote.indexOf(highlightText)),

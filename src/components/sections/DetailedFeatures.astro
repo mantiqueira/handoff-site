@@ -1,18 +1,12 @@
 ---
 import DetailRow from "./DetailRow.astro";
-import desktopMockupLocal from "@/assets/images/desktop-mockup.png";
-import phoneScreenLocal from "@/assets/images/phone-screen.png";
-import isoCard1Local from "@/assets/images/iso-card-1.png";
-import isoCard2Local from "@/assets/images/iso-card-2.png";
-import isoCard3Local from "@/assets/images/iso-card-3.png";
+import desktopMockup from "@/assets/images/desktop-mockup.png";
+import phoneScreen from "@/assets/images/phone-screen.png";
+import isoCard1 from "@/assets/images/iso-card-1.png";
+import isoCard2 from "@/assets/images/iso-card-2.png";
+import isoCard3 from "@/assets/images/iso-card-3.png";
 
-interface Props {
-  detailRows?: any[];
-}
-
-const { detailRows } = Astro.props;
-
-const localRows = [
+const rows = [
   {
     eyebrow: "Lead intake & pipeline",
     title: "Never lose an opportunity",
@@ -24,7 +18,7 @@ const localRows = [
     ],
     reverse: false,
     visualType: "desktop" as const,
-    visualImages: [desktopMockupLocal],
+    visualImages: [desktopMockup],
   },
   {
     eyebrow: "Rapid AI estimating",
@@ -37,7 +31,7 @@ const localRows = [
     ],
     reverse: true,
     visualType: "phones" as const,
-    visualImages: [phoneScreenLocal],
+    visualImages: [phoneScreen],
   },
   {
     eyebrow: "Automated professional proposals",
@@ -49,7 +43,7 @@ const localRows = [
     ],
     reverse: false,
     visualType: "isometric" as const,
-    visualImages: [isoCard1Local, isoCard2Local, isoCard3Local],
+    visualImages: [isoCard1, isoCard2, isoCard3],
   },
   {
     eyebrow: "Automated follow-up",
@@ -62,7 +56,7 @@ const localRows = [
     ],
     reverse: true,
     visualType: "phones" as const,
-    visualImages: [phoneScreenLocal],
+    visualImages: [phoneScreen],
   },
   {
     eyebrow: "Consistent pricing systems",
@@ -75,49 +69,23 @@ const localRows = [
     ],
     reverse: false,
     visualType: "isometric" as const,
-    visualImages: [isoCard1Local, isoCard2Local, isoCard3Local],
+    visualImages: [isoCard1, isoCard2, isoCard3],
   },
 ];
-
-// Use Sanity data if available, otherwise fallback
-const rows = detailRows?.length
-  ? detailRows.map((r: any) => ({
-      eyebrow: r.eyebrow,
-      title: r.title,
-      description: r.description,
-      bullets: r.bullets || [],
-      reverse: r.reverse ?? false,
-      visualType: r.visualType as "desktop" | "phones" | "isometric",
-      imageUrls: (r.images || []).map((img: any) => img?.asset?.url).filter(Boolean),
-    }))
-  : null;
 ---
 
 <section class="relative z-[2] px-4 pb-2 bg-brand-800">
   <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
-    {rows
-      ? rows.map((r: any) => (
-          <DetailRow
-            eyebrow={r.eyebrow}
-            title={r.title}
-            description={r.description}
-            bullets={r.bullets}
-            reverse={r.reverse}
-            visualType={r.visualType}
-            imageUrls={r.imageUrls}
-          />
-        ))
-      : localRows.map((r) => (
-          <DetailRow
-            eyebrow={r.eyebrow}
-            title={r.title}
-            description={r.description}
-            bullets={r.bullets}
-            reverse={r.reverse}
-            visualType={r.visualType}
-            visualImages={r.visualImages}
-          />
-        ))
-    }
+    {rows.map((r) => (
+      <DetailRow
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        bullets={r.bullets}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        visualImages={r.visualImages}
+      />
+    ))}
   </div>
 </section>

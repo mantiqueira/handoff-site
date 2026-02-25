@@ -1,6 +1,5 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import { VisualEditing } from "@sanity/astro/visual-editing";
 import "../styles/global.css";
 
 interface Props {
@@ -12,9 +11,6 @@ const {
   title,
   description = "Train an AI teammate to run your construction business. Set your rules once — Handoff applies them automatically across every estimate, proposal, and change order.",
 } = Astro.props;
-
-const visualEditingEnabled =
-  import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
 ---
 
 <!doctype html>
@@ -33,11 +29,7 @@ const visualEditingEnabled =
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class="min-h-screen bg-brand-800 overflow-x-hidden">
+  <body class="min-h-screen bg-brand-800 overflow-x-hidden animate-fade-in">
     <slot />
-    <VisualEditing enabled={visualEditingEnabled} />
-    <script is:inline>
-      window.addEventListener("load", () => document.body.classList.add("loaded"));
-    </script>
   </body>
 </html>

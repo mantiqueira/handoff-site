@@ -1,43 +1,29 @@
 ---
 import TestimonialCard from "./TestimonialCard.astro";
-import featureEstimateLocal from "@/assets/icons/feature-estimate.svg";
-import featureWinLocal from "@/assets/icons/feature-win.svg";
-import featureMoneyLocal from "@/assets/icons/feature-money.svg";
+import featureEstimate from "@/assets/icons/feature-estimate.svg";
+import featureWin from "@/assets/icons/feature-win.svg";
+import featureMoney from "@/assets/icons/feature-money.svg";
 
-interface Props {
-  features?: any;
-  testimonial?: any;
-}
+const sectionTitle = "Everything you need to win more projects";
+const sectionSubtitle = "Handoff gives you the tools to respond faster, look more professional, and protect your margins on every job.";
 
-const { features: featuresProp, testimonial } = Astro.props;
-
-const localFeatures = [
+const cards = [
   {
-    icon: featureEstimateLocal.src,
+    icon: featureEstimate.src,
     title: "Estimate 10x faster",
     desc: "Turn 3 hour estimates into 20-minute work using real contractor data, not guesswork, with your pricing rules baked right in.",
   },
   {
-    icon: featureWinLocal.src,
+    icon: featureWin.src,
     title: "Win more projects",
     desc: "Capture walkthrough details automatically and respond same-day. Automated follow-up keeps leads warm so you never lose a good prospect.",
   },
   {
-    icon: featureMoneyLocal.src,
+    icon: featureMoney.src,
     title: "Make more money",
     desc: "Send professional proposals instantly, know exactly when clients view them and keep leads moving with automated follow-up that actually works.",
   },
 ];
-
-const sectionTitle = featuresProp?.title ?? "Everything you need to win more projects";
-const sectionSubtitle = featuresProp?.subtitle ?? "Handoff gives you the tools to respond faster, look more professional, and protect your margins on every job.";
-const cards = featuresProp?.cards?.length
-  ? featuresProp.cards.map((c: any) => ({
-      icon: c.icon?.asset?.url ?? "",
-      title: c.title,
-      desc: c.description,
-    }))
-  : localFeatures;
 ---
 
 <section id="features" class="relative z-[2] px-4 pb-2 bg-transparent transition-colors duration-300">
@@ -54,7 +40,7 @@ const cards = featuresProp?.cards?.length
 
     <!-- Grid -->
     <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8" data-animate="stagger">
-      {cards.map((f: any) => (
+      {cards.map((f) => (
         <div class="bg-bg-secondary rounded-xl p-6 flex flex-col gap-16">
           <div class="w-12 h-12 bg-white rounded-md flex items-center justify-center shadow-3xl">
             <img src={f.icon} alt="" class="w-6 h-6" />
@@ -68,6 +54,6 @@ const cards = featuresProp?.cards?.length
     </div>
 
     <!-- Testimonial -->
-    <TestimonialCard testimonial={testimonial} />
+    <TestimonialCard />
   </div>
 </section>

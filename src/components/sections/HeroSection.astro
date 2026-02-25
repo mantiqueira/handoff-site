@@ -1,36 +1,25 @@
 ---
 import Button from "@/components/ui/Button.astro";
-import bgPatternLocal from "@/assets/images/background-pattern.png";
-import heroGlowLocal from "@/assets/images/hero-glow-line.svg";
-import heroScreenshotLocal from "@/assets/images/hero-screenshot.png";
-import catalogThumbLocal from "@/assets/images/catalog-thumb.png";
+import bgPattern from "@/assets/images/background-pattern.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+import heroScreenshot from "@/assets/images/hero-screenshot.png";
+import catalogThumb from "@/assets/images/catalog-thumb.png";
 
-interface Props {
-  hero?: any;
-}
-
-const { hero } = Astro.props;
-
-const eyebrow = hero?.eyebrow ?? "Construction-Trained AI for Sales and Lead Intake";
-const title = hero?.title ?? "Never lose money to slow estimates";
-const description = hero?.description ?? "Turn site visits into signed contracts faster than any competitor. Handoff captures every lead and generates complete estimates using trained AI built for construction.";
-const ctaText = hero?.ctaText ?? "See how it works";
-
-const bgPatternSrc = hero?.backgroundPattern?.asset?.url ?? bgPatternLocal.src;
-const glowLineSrc = hero?.glowLine?.asset?.url ?? heroGlowLocal.src;
-const screenshotSrc = hero?.screenshot?.asset?.url ?? heroScreenshotLocal.src;
-const catalogThumbSrc = hero?.catalogThumb?.asset?.url ?? catalogThumbLocal.src;
+const eyebrow = "Construction-Trained AI for Sales and Lead Intake";
+const title = "Never lose money to slow estimates";
+const description = "Turn site visits into signed contracts faster than any competitor. Handoff captures every lead and generates complete estimates using trained AI built for construction.";
+const ctaText = "See how it works";
 ---
 
 <section id="hero" class="hero-fixed">
   <!-- Background grid pattern -->
   <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0">
-    <img src={bgPatternSrc} alt="" class="w-full h-full block object-contain object-top" />
+    <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
   </div>
 
   <!-- Glow line -->
   <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
-    <img src={glowLineSrc} alt="" class="w-full h-full block" />
+    <img src={heroGlow.src} alt="" class="w-full h-full block" />
   </div>
 
   <!-- Content -->
@@ -40,7 +29,7 @@ const catalogThumbSrc = hero?.catalogThumb?.asset?.url ?? catalogThumbLocal.src;
         {eyebrow}
       </p>
       <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white">
-        {title.includes("\n") ? title.split("\n").map((line: string, i: number) => <Fragment>{i > 0 && <br />}{line}</Fragment>) : <Fragment set:html={title.replace(/\\n/g, '<br />')} />}
+        {title}
       </h1>
       <p class="text-lg lg:text-xl font-medium leading-[30px] text-text-on-brand-tertiary max-w-[560px] -mt-6">
         {description}
@@ -60,7 +49,7 @@ const catalogThumbSrc = hero?.catalogThumb?.asset?.url ?? catalogThumbLocal.src;
     <div class="flex-1 relative z-[2]">
       <div class="relative bg-white/10 backdrop-blur-[4px] rounded-3xl p-8 overflow-hidden">
         <img
-          src={screenshotSrc}
+          src={heroScreenshot.src}
           alt="Handoff dashboard showing construction estimate"
           class="w-full h-[500px] object-cover object-left-top rounded-xl"
         />
@@ -68,7 +57,7 @@ const catalogThumbSrc = hero?.catalogThumb?.asset?.url ?? catalogThumbLocal.src;
         <div class="absolute bottom-20 left-0 bg-white rounded-lg p-3 shadow-[0_8px_24px_rgba(0,0,0,0.12)] w-[280px] border border-black/[0.06]">
           <div class="flex gap-3">
             <div class="w-12 h-12 rounded-[4px] overflow-hidden shrink-0 bg-[#f5f5f5] border border-[rgba(155,161,161,0.24)]">
-              <img src={catalogThumbSrc} alt="Product thumbnail" class="w-full h-full object-cover" />
+              <img src={catalogThumb.src} alt="Product thumbnail" class="w-full h-full object-cover" />
             </div>
             <div class="flex-1 min-w-0 flex flex-col gap-1">
               <p class="text-[11px] font-medium text-text-primary leading-[1.4]">Demo Bathroom Sink</p>

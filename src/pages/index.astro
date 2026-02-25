@@ -1,142 +1,21 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import PageRenderer from "@/components/PageRenderer.astro";
 import Header from "@/components/sections/Header.astro";
 import HeroSection from "@/components/sections/HeroSection.astro";
 import FeaturesSection from "@/components/sections/FeaturesSection.astro";
 import DetailedFeatures from "@/components/sections/DetailedFeatures.astro";
-import FaqSection from "@/components/sections/FaqSection";
+import FaqSection from "@/components/sections/FaqSection.astro";
 import Footer from "@/components/sections/Footer.astro";
-import { client } from "@/lib/sanity";
-import { navItems as localNavItems, footerColumns as localFooterColumns, faqItems as localFaqItems } from "@/lib/navigation";
-
-// Try to fetch a CMS-managed "home" page first
-let homePage: any = null;
-try {
-  homePage = await client.fetch(
-    `*[_type == "page" && slug.current == "home"][0]{
-      title,
-      slug,
-      seoDescription,
-      sections[]{
-        _type,
-        _key,
-        enabled,
-        _type == "heroBlock" => {
-          eyebrow, title, description, ctaText,
-          screenshot{ asset->{url} },
-          catalogThumb{ asset->{url} },
-          backgroundPattern{ asset->{url} },
-          glowLine{ asset->{url} }
-        },
-        _type == "featuresBlock" => {
-          title, subtitle,
-          cards[]{ icon{ asset->{url} }, title, description }
-        },
-        _type == "testimonialBlock" => {
-          avatar{ asset->{url} },
-          name, role, source, rating, quote, highlightText
-        },
-        _type == "detailRowsBlock" => {
-          rows[]{
-            eyebrow, title, description, bullets, ctaText, reverse, visualType,
-            images[]{ asset->{url} }
-          }
-        },
-        _type == "faqBlock" => {
-          items[]{ question, answer }
-        },
-        _type == "richTextBlock" => {
-          body[]{ ..., asset->{url} }
-        }
-      }
-    }`,
-  );
-} catch (e) {
-  console.warn("Failed to fetch home page from CMS:", e);
-}
-
-const usePageBuilder = homePage?.sections?.length > 0;
-
-// Legacy fallback: fetch singletons only if no CMS home page
-let hero: any = null;
-let features: any = null;
-let testimonial: any = null;
-let detailRows: any[] = [];
-let faqItems: any[] = [];
-let footerColumns: any[] = [];
-let navItems: any[] = [];
-
-if (!usePageBuilder) {
-  try {
-    [hero, features, testimonial, detailRows, faqItems, footerColumns, navItems] = await Promise.all([
-      client.fetch(`*[_type == "heroSection"][0]{
-        eyebrow, title, description, ctaText,
-        screenshot{ asset->{url} },
-        catalogThumb{ asset->{url} },
-        backgroundPattern{ asset->{url} },
-        glowLine{ asset->{url} }
-      }`),
-      client.fetch(`*[_type == "featuresSection"][0]{
-        title, subtitle,
-        cards[]{ icon{ asset->{url} }, title, description }
-      }`),
-      client.fetch(`*[_type == "testimonial"][0]{
-        avatar{ asset->{url} },
-        name, role, source, rating, quote, highlightText
-      }`),
-      client.fetch(`*[_type == "detailRow"] | order(order asc){
-        eyebrow, title, description, bullets, ctaText, reverse, visualType,
-        images[]{ asset->{url} }
-      }`),
-      client.fetch(`*[_type == "faqItem"] | order(order asc){ question, answer }`),
-      client.fetch(`*[_type == "footerColumn"] | order(order asc){
-        title, lightTitle, links[]{ label, href }
-      }`),
-      client.fetch(`*[_type == "navItem"] | order(order asc){
-        label, href, wide, children[]{ label, href, description }
-      }`),
-    ]);
-  } catch (e) {
-    console.warn("Sanity fetch failed, using local fallback data:", e);
-  }
-}
-
-// Build fallback data
-const resolvedFaqItems = faqItems?.length
-  ? faqItems.map((f: any) => ({ question: f.question, answer: f.answer }))
-  : localFaqItems;
-
-const resolvedFooterColumns = footerColumns?.length
-  ? footerColumns.map((c: any) => ({
-      title: c.title,
-      lightTitle: c.lightTitle,
-      links: c.links || [],
-    }))
-  : localFooterColumns;
-
-const resolvedNavItems = navItems?.length
-  ? navItems.map((n: any) =>
-      n.children?.length
-        ? { label: n.label, items: n.children, wide: n.wide }
-        : { label: n.label, href: n.href || "#" }
-    )
-  : localNavItems;
+import { navItems, footerColumns, faqItems } from "@/lib/navigation";
 ---
 
 <BaseLayout title="Handoff — Construction-Trained AI for Sales and Lead Intake">
-  {usePageBuilder ? (
-    <PageRenderer page={homePage} />
-  ) : (
-    <>
-      <Header navItems={resolvedNavItems} />
-      <HeroSection hero={hero} />
-      <FeaturesSection features={features} testimonial={testimonial} />
-      <DetailedFeatures detailRows={detailRows} />
-      <FaqSection items={resolvedFaqItems} client:visible />
-      <Footer columns={resolvedFooterColumns} />
-    </>
-  )}
+  <Header navItems={navItems} />
+  <HeroSection />
+  <FeaturesSection />
+  <DetailedFeatures />
+  <FaqSection items={faqItems} />
+  <Footer columns={footerColumns} />
 </BaseLayout>
 
 <script>
@@ -162,7 +41,6 @@ const resolvedNavItems = navItems?.length
   window.addEventListener("scroll", () => {
     const scrollY = window.scrollY;
 
-    // Header scroll state
     if (header) {
       if (scrollY > 40) {
         header.classList.add("header-scrolled");
@@ -171,7 +49,6 @@ const resolvedNavItems = navItems?.length
       }
     }
 
-    // Hero fade + parallax
     if (heroContainer) {
       const fadeEnd = window.innerHeight * 0.5;
       const progress = Math.min(Math.max(scrollY / fadeEnd, 0), 1);
@@ -179,7 +56,6 @@ const resolvedNavItems = navItems?.length
       heroContainer.style.transform = `translateY(${progress * -40}px)`;
     }
 
-    // Features solid background
     if (features && heroSection) {
       const heroBottom = heroSection.offsetHeight;
       if (scrollY >= heroBottom) {
@@ -190,6 +66,5 @@ const resolvedNavItems = navItems?.length
     }
   });
 
-  // Initialize GSAP scroll animations
   initScrollAnimations();
 </script>

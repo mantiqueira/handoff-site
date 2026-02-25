@@ -69,7 +69,9 @@ export default defineConfig({
     presentationTool({
       resolve,
       previewUrl: {
-        initial: location.origin,
+        initial: location.origin.includes("sanity.studio")
+          ? "https://handoff-site-ten.vercel.app"
+          : location.origin,
       },
     }),
   ],

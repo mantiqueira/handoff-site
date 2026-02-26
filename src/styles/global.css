@@ -204,6 +204,13 @@
   transform: none;
 }
 
+/* ─── Footer reveal (fixed behind content) ─── */
+.footer-spacer {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+}
+
 /* ─── Page Transitions (fade through dark green) ─── */
 @keyframes page-fade-out {
   from { opacity: 1; }

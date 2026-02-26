@@ -113,21 +113,14 @@
   pointer-events: auto;
 }
 
-/* ─── Hero Fixed + Parallax ─── */
+/* ─── Hero Sticky ─── */
 .hero-fixed {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   overflow: visible;
   padding: 8px 16px 0;
   padding-top: 80px;
   z-index: 0;
-}
-
-.hero-spacer {
-  position: relative;
-  pointer-events: none;
 }
 
 /* ─── Features Solid Background ─── */

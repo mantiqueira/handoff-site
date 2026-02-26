@@ -215,10 +215,10 @@
 }
 
 ::view-transition-old(root) {
-  animation: page-fade-out 0.3s ease-in-out forwards;
+  animation: page-fade-out 0.5s ease-in-out forwards;
 }
 ::view-transition-new(root) {
-  animation: page-fade-in 0.3s ease-in-out forwards;
-  animation-delay: 0.15s;
+  animation: page-fade-in 0.5s ease-in-out forwards;
+  animation-delay: 0.3s;
   opacity: 0;
 }

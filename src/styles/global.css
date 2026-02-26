@@ -3,6 +3,7 @@
 /* ─── Theme Tokens ─── */
 @theme {
   /* Brand colors */
+  --color-brand-25: #f4f6f4;
   --color-brand-50: #eef5f1;
   --color-brand-100: #d4e7dc;
   --color-brand-200: #a9cfb9;

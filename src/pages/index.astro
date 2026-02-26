@@ -36,6 +36,7 @@ import { navItems, footerColumns, faqItems } from "@/lib/navigation";
   if (heroSection) {
     setSpacerHeight();
     window.addEventListener("resize", setSpacerHeight);
+    window.addEventListener("load", setSpacerHeight);
   }
 
   window.addEventListener("scroll", () => {

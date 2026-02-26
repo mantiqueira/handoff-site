@@ -30,19 +30,24 @@ export const navItems: NavItem[] = [
     wide: true,
     items: [
       {
-        label: "Sales & Marketing Growth",
-        href: "#",
-        description: "Win more projects with AI-powered estimates and proposals that convert leads into clients faster.",
+        label: "Project Management",
+        href: "/project-management",
+        description: "Run more projects without more admin. Documentation, scheduling, and crew coordination in one system.",
       },
       {
-        label: "Project Management & Operations",
-        href: "#",
-        description: "Streamline projects from estimate to completion with connected AI systems that save time and reduce errors.",
+        label: "Financial Management",
+        href: "/financial-management",
+        description: "Get paid faster with AI-powered invoicing, track profitability, and make data-driven decisions.",
       },
       {
-        label: "Financial & Business Management",
-        href: "#",
-        description: "Get paid faster with AI-powered digital invoicing, track profitability, and make data-driven decisions to grow your business.",
+        label: "Permissions & Roles",
+        href: "/permissions-roles",
+        description: "Keep control of your business as your team grows with role-based access and approval workflows.",
+      },
+      {
+        label: "Customization",
+        href: "/customization",
+        description: "Set up instructions, templates, and workflows that match how you actually run your business.",
       },
     ],
   },
@@ -80,9 +85,10 @@ export const footerColumns: FooterColumn[] = [
   {
     title: "Solutions",
     links: [
-      { label: "Sales & Marketing Growth", href: "#" },
-      { label: "Project Management", href: "#" },
-      { label: "Financial Management", href: "#" },
+      { label: "Project Management", href: "/project-management" },
+      { label: "Financial Management", href: "/financial-management" },
+      { label: "Permissions & Roles", href: "/permissions-roles" },
+      { label: "Customization", href: "/customization" },
       { label: "Pricing", href: "#" },
     ],
   },

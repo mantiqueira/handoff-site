@@ -5,6 +5,7 @@ import HeroSection from "@/components/sections/HeroSection.astro";
 import FeaturesSection from "@/components/sections/FeaturesSection.astro";
 import DetailedFeatures from "@/components/sections/DetailedFeatures.astro";
 import FaqSection from "@/components/sections/FaqSection.astro";
+import CtaSection from "@/components/sections/CtaSection.astro";
 import Footer from "@/components/sections/Footer.astro";
 import { navItems, footerColumns, faqItems } from "@/lib/navigation";
 ---
@@ -15,6 +16,7 @@ import { navItems, footerColumns, faqItems } from "@/lib/navigation";
   <FeaturesSection />
   <DetailedFeatures />
   <FaqSection items={faqItems} />
+  <CtaSection />
   <Footer columns={footerColumns} />
 </BaseLayout>
 

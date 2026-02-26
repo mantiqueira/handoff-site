@@ -1,0 +1,36 @@
+---
+import Button from "@/components/ui/Button.astro";
+---
+
+<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+  <div class="max-w-[1920px] mx-auto bg-gradient-to-b from-brand-100 to-brand-25 rounded-3xl border border-black/[0.04] py-24 overflow-hidden relative">
+    <!-- Background ellipse glow -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1800px] h-[400px] rotate-[135deg] bg-white/30 rounded-full blur-[120px]"></div>
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-8 flex flex-col lg:flex-row items-center gap-16 relative">
+      <!-- Text -->
+      <div class="flex-1 flex flex-col gap-12">
+        <div class="flex flex-col gap-8">
+          <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary">
+            Ready to win more projects?
+          </h2>
+          <p class="text-lg font-normal leading-7 text-text-secondary">
+            See how modern contractors are getting more projects by going from walkthrough to signing contracts in record time with a trained AI team member.
+          </p>
+        </div>
+        <div>
+          <Button variant="primary" size="lg">Request a demo</Button>
+        </div>
+      </div>
+
+      <!-- Screenshot mockup placeholder -->
+      <div class="flex-1 h-[512px] relative">
+        <div class="w-full h-full rounded-2xl bg-detail-visual-bg flex items-center justify-center">
+          <p class="text-white/80 text-lg font-medium">Screenshot of Handoff app</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

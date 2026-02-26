@@ -52,6 +52,9 @@ Key token prefixes:
 4. **Animations** use `data-animate="fade-up"` or `data-animate="stagger"` attributes. The `animations.ts` IntersectionObserver handles them. No GSAP.
 5. **FAQ** uses native `<details>/<summary>` with CSS transitions. No JS needed.
 
+## Layout preservation rule
+**Never change the layout or structure of existing components unless explicitly asked.** When adding new content, features, or fixing bugs, preserve the current HTML structure, class names, and visual layout. This applies to all components — sections, UI elements, and pages. Only modify layout when the user specifically requests a layout change.
+
 ## What NOT to change
 - **Do not add React, Vue, or any JS framework.** This site ships zero framework JS.
 - **Do not add GSAP or any animation library.** Use CSS transitions + the IntersectionObserver in `animations.ts`.

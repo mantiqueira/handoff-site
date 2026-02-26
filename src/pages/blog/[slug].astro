@@ -50,6 +50,8 @@ const publishedDate = post.data.publishedAt.toLocaleDateString("en-US", {
             src={post.data.featuredImage}
             alt={post.data.title}
             class="w-full rounded-xl mb-12"
+            loading="lazy"
+            decoding="async"
           />
         )}
 

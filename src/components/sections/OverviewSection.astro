@@ -1,0 +1,157 @@
+---
+import checkCircle from "@/assets/icons/check-circle.svg";
+
+const eyebrow = "Everything you need";
+const title = "Built for the way contractors actually work";
+const description = "Talk while driving to the next site. Upload plans from your phone. Get pricing from the suppliers you already use. Handoff fits into your day instead of adding more steps to it.";
+
+const features = [
+  {
+    title: "AI-powered estimates",
+    desc: "Turn site visits into detailed estimates in minutes, not hours. Uses your pricing rules, not guesswork.",
+  },
+  {
+    title: "Lead capture & pipeline",
+    desc: "Every lead tracked from first call to signed contract. Never let an opportunity slip through the cracks.",
+  },
+  {
+    title: "Professional proposals",
+    desc: "Send polished, branded proposals that make you look like the biggest company in town.",
+  },
+  {
+    title: "Automated follow-up",
+    desc: "Email and SMS follow-ups happen automatically. Know the moment a client opens your proposal.",
+  },
+  {
+    title: "Custom catalogs",
+    desc: "Your own rates for labor, materials, and specialty items. Reuse them across every estimate.",
+  },
+  {
+    title: "Trained on your presets",
+    desc: "The AI learns how you price, organize, and present your work. It gets better with every job.",
+  },
+];
+
+const bottomCards = [
+  {
+    title: "Build your custom catalogs",
+    desc: "Add your own rates for labor, materials, and specialty items. Reuse them across every estimate. The AI pulls from your catalogs first, then fills gaps with supplier pricing.",
+    link: "/",
+    placeholder: "Screenshot of custom catalog with pricing cards",
+  },
+  {
+    title: "Train AI with your presets",
+    desc: "Add your rates for labor, materials, and specialty items. The AI uses your catalogs first, then fills gaps with live supplier pricing and our AI-trained cost data.",
+    link: "/",
+    placeholder: "Screenshot of AI preset training interface",
+    dark: true,
+  },
+  {
+    title: "Track every lead in one place",
+    desc: "See every opportunity from first contact to signed contract. Know exactly where each lead stands, what's been sent, and what needs follow-up.",
+    link: "/",
+    placeholder: "Screenshot of lead tracking pipeline",
+  },
+  {
+    title: "Send proposals that close",
+    desc: "Generate professional, branded proposals in seconds. Clients get a polished document that builds trust and makes signing easy.",
+    link: "/",
+    placeholder: "Screenshot of proposal builder",
+    dark: true,
+  },
+  {
+    title: "Automate your follow-ups",
+    desc: "Set it and forget it. Automatic email and SMS sequences keep leads warm while you focus on the job site.",
+    link: "/",
+    placeholder: "Screenshot of follow-up automation",
+  },
+  {
+    title: "Know your real margins",
+    desc: "See true profit on every job with real-time cost tracking. No more guessing whether a project made or lost money.",
+    link: "/",
+    placeholder: "Screenshot of margin tracking dashboard",
+    dark: true,
+  },
+];
+---
+
+<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+
+    <!-- Main: Text+Features on left, Screenshot on right -->
+    <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full">
+      <div class="flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
+        <!-- Left: Text + Feature Grid -->
+        <div class="flex-1 flex flex-col gap-10">
+          <div class="flex flex-col gap-5">
+            <p class="text-sm font-medium leading-5 text-text-tertiary">
+              {eyebrow}
+            </p>
+            <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary">
+              {title}
+            </h2>
+            <p class="text-lg font-normal leading-7 text-text-tertiary">
+              {description}
+            </p>
+          </div>
+
+          <!-- Feature Grid: 2 columns, 3 rows -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+            {features.map((f) => (
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                  <img src={checkCircle.src} alt="" class="w-5 h-5 shrink-0" loading="lazy" decoding="async" />
+                  <h3 class="text-sm font-semibold leading-5 text-text-primary">{f.title}</h3>
+                </div>
+                <p class="text-sm font-normal leading-5 text-text-tertiary pl-7">
+                  {f.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right: Screenshot placeholder (4:3 ratio) -->
+        <div class="w-full max-w-[500px]">
+          <div class="w-full aspect-[3/4] rounded-2xl bg-detail-visual-bg flex items-center justify-center">
+            <p class="text-white/80 text-lg font-medium">Screenshot of Handoff dashboard</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Feature Cards -->
+    <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-24">
+      {bottomCards.map((card) => (
+        <div class="flex flex-col gap-8 overflow-hidden">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-display text-2xl lg:text-[28px] font-medium leading-8 lg:leading-9 tracking-[-0.56px] text-text-primary">
+              {card.title}
+            </h3>
+            <p class="text-base font-normal leading-6 text-text-tertiary">
+              {card.desc}
+            </p>
+            <a href={card.link} class="inline-flex items-center gap-2 text-sm font-semibold leading-5 text-brand-600 hover:text-brand-700 transition-colors">
+              Learn more
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+          <!-- Screenshot placeholder (4:3 ratio) -->
+          <div class:list={[
+            "w-full aspect-[4/3] rounded-2xl flex items-center justify-center",
+            card.dark ? "bg-bg-brand-solid" : "bg-bg-secondary"
+          ]}>
+            <p class:list={[
+              "text-base font-medium",
+              card.dark ? "text-white/60" : "text-text-quaternary"
+            ]}>
+              {card.placeholder}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

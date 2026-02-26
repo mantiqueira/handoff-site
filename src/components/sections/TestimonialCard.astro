@@ -24,7 +24,7 @@ const parts = highlightText && quote.includes(highlightText)
   <!-- Header -->
   <div class="flex items-center gap-4">
     <div class="w-6 h-6 rounded-full overflow-hidden">
-      <img src={avatarSrc} alt={name} class="w-full h-full object-cover" />
+      <img src={avatarSrc} alt={name} class="w-full h-full object-cover" loading="lazy" decoding="async" />
     </div>
     <div class="flex gap-1">
       {Array.from({ length: rating }).map(() => <StarIcon />)}

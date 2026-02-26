@@ -51,7 +51,7 @@ const images: string[] = (visualImages || []).map((img) => img.src);
     {visualType === "desktop" && images[0] && (
       <div class="w-full h-full relative overflow-hidden">
         <div class="desktop-screen">
-          <img src={images[0]} alt="Dashboard screenshot" />
+          <img src={images[0]} alt="Dashboard screenshot" loading="lazy" decoding="async" />
         </div>
       </div>
     )}
@@ -59,19 +59,19 @@ const images: string[] = (visualImages || []).map((img) => img.src);
     {visualType === "phones" && images[0] && (
       <div class="relative w-full h-full flex items-center justify-center">
         <div class="absolute w-[220px] h-[440px] rounded-3xl overflow-hidden shadow-[0_24px_48px_-12px_rgba(0,0,0,0.2)] z-[1] phone-back">
-          <img src={images[0]} alt="Phone screen" class="w-full h-full object-cover" />
+          <img src={images[0]} alt="Phone screen" class="w-full h-full object-cover" loading="lazy" decoding="async" />
         </div>
         <div class="absolute w-[220px] h-[440px] rounded-3xl overflow-hidden shadow-[0_24px_48px_-12px_rgba(0,0,0,0.2)] z-[2] phone-front">
-          <img src={images[0]} alt="Phone screen" class="w-full h-full object-cover" />
+          <img src={images[0]} alt="Phone screen" class="w-full h-full object-cover" loading="lazy" decoding="async" />
         </div>
       </div>
     )}
 
     {visualType === "isometric" && images.length >= 3 && (
       <div class="relative w-full h-full flex items-center justify-center iso-stack">
-        <img src={images[0]} alt="" class="absolute w-[280px] h-auto top-10 left-1/2 iso-card-1 z-[3] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" />
-        <img src={images[1]} alt="" class="absolute w-[240px] h-auto top-[120px] right-0 iso-card z-[2] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" />
-        <img src={images[2]} alt="" class="absolute w-[220px] h-auto bottom-10 left-5 iso-card z-[1] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" />
+        <img src={images[0]} alt="" class="absolute w-[280px] h-auto top-10 left-1/2 iso-card-1 z-[3] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
+        <img src={images[1]} alt="" class="absolute w-[240px] h-auto top-[120px] right-0 iso-card z-[2] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
+        <img src={images[2]} alt="" class="absolute w-[220px] h-auto bottom-10 left-5 iso-card z-[1] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
       </div>
     )}
 

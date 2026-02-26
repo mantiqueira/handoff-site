@@ -32,6 +32,8 @@ const posts = (await getCollection("blog")).sort(
                   src={post.data.featuredImage}
                   alt={post.data.title}
                   class="w-full aspect-[16/10] object-cover rounded-xl"
+                  loading="lazy"
+                  decoding="async"
                 />
               )}
               <h2 class="font-display text-xl font-medium text-text-primary group-hover:text-brand-500 transition-colors">

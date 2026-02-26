@@ -197,32 +197,9 @@
   to { opacity: 1; }
 }
 
-/* ─── Scroll-triggered Animations ─── */
-[data-animate="fade-up"] {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-[data-animate="fade-up"].animate-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+/* ─── Scroll-triggered Animations (disabled — show everything immediately) ─── */
+[data-animate="fade-up"],
 [data-animate="stagger"] > * {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-[data-animate="stagger"].animate-in > * {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
-
-[data-animate="stagger"].animate-in > *:nth-child(1) { transition-delay: 0ms; }
-[data-animate="stagger"].animate-in > *:nth-child(2) { transition-delay: 100ms; }
-[data-animate="stagger"].animate-in > *:nth-child(3) { transition-delay: 200ms; }
-[data-animate="stagger"].animate-in > *:nth-child(4) { transition-delay: 300ms; }
-[data-animate="stagger"].animate-in > *:nth-child(5) { transition-delay: 400ms; }
-[data-animate="stagger"].animate-in > *:nth-child(6) { transition-delay: 500ms; }

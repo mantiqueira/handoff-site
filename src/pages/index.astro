@@ -51,10 +51,7 @@ import { navItems, footerColumns, faqItems } from "@/lib/navigation";
     }
 
     if (heroContainer) {
-      const fadeEnd = window.innerHeight * 0.5;
-      const progress = Math.min(Math.max(scrollY / fadeEnd, 0), 1);
-      heroContainer.style.opacity = String(1 - progress);
-      heroContainer.style.transform = `translateY(${progress * -40}px)`;
+      heroContainer.style.opacity = "1";
     }
 
     if (features && heroSection) {

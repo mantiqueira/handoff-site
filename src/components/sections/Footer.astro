@@ -11,8 +11,7 @@ const { columns } = Astro.props;
 const footerColumns = columns?.length ? columns : localFooterColumns;
 ---
 
-<div class="footer-spacer"></div>
-<footer class="fixed bottom-0 left-0 right-0 z-[1] min-h-screen flex flex-col justify-end pt-16 pb-12 bg-brand-800">
+<footer class="relative z-[2] pt-16 pb-12 bg-brand-800">
   <div class="max-w-[1440px] mx-auto px-8 flex flex-col gap-12">
     <!-- Columns -->
     <div class="flex flex-wrap gap-y-8 lg:gap-y-12 gap-x-8 justify-between" data-animate="fade-up">

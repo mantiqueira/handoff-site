@@ -19,50 +19,44 @@ import { navItems, footerColumns, faqItems } from "@/lib/navigation";
 </BaseLayout>
 
 <script>
-  import { initScrollAnimations } from "@/lib/animations";
+  document.addEventListener("astro:page-load", () => {
+    const header = document.getElementById("site-header");
+    const heroContainer = document.getElementById("hero-container");
+    const heroSection = document.getElementById("hero");
+    const heroSpacer = document.getElementById("hero-spacer");
+    const features = document.getElementById("features");
 
-  const header = document.getElementById("site-header");
-  const heroContainer = document.getElementById("hero-container");
-  const heroSection = document.getElementById("hero");
-  const heroSpacer = document.getElementById("hero-spacer");
-  const features = document.getElementById("features");
-
-  function setSpacerHeight() {
-    if (heroSection && heroSpacer) {
-      heroSpacer.style.height = heroSection.offsetHeight + "px";
-    }
-  }
-
-  if (heroSection) {
-    setSpacerHeight();
-    window.addEventListener("resize", setSpacerHeight);
-    window.addEventListener("load", setSpacerHeight);
-  }
-
-  window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY;
-
-    if (header) {
-      if (scrollY > 40) {
-        header.classList.add("header-scrolled");
-      } else {
-        header.classList.remove("header-scrolled");
+    function setSpacerHeight() {
+      if (heroSection && heroSpacer) {
+        heroSpacer.style.height = heroSection.offsetHeight + "px";
       }
     }
 
-    if (heroContainer) {
-      heroContainer.style.opacity = "1";
+    if (heroSection) {
+      setSpacerHeight();
+      window.addEventListener("resize", setSpacerHeight);
+      window.addEventListener("load", setSpacerHeight);
     }
 
-    if (features && heroSection) {
-      const heroBottom = heroSection.offsetHeight;
-      if (scrollY >= heroBottom) {
-        features.classList.add("features-solid-bg");
-      } else {
-        features.classList.remove("features-solid-bg");
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+
+      if (header) {
+        if (scrollY > 40) {
+          header.classList.add("header-scrolled");
+        } else {
+          header.classList.remove("header-scrolled");
+        }
       }
-    }
+
+      if (features && heroSection) {
+        const heroBottom = heroSection.offsetHeight;
+        if (scrollY >= heroBottom) {
+          features.classList.add("features-solid-bg");
+        } else {
+          features.classList.remove("features-solid-bg");
+        }
+      }
+    });
   });
-
-  initScrollAnimations();
 </script>

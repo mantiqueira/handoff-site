@@ -45,7 +45,7 @@ function isWide(item: any): boolean {
               <ChevronDown />
             </button>
             <div class:list={[
-              "dropdown-panel absolute top-full left-1/2 -translate-x-1/2 bg-[rgba(17,49,32,0.95)] backdrop-blur-[16px] border border-white/10 rounded-xl p-2 flex flex-col",
+              "dropdown-panel absolute top-full left-1/2 bg-[rgba(17,49,32,0.95)] backdrop-blur-[16px] border border-white/10 rounded-xl p-2 flex flex-col",
               isWide(item) ? "min-w-[360px]" : "min-w-[240px]"
             ]}>
               {getChildren(item).map((link: any) => (

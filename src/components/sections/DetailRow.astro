@@ -10,9 +10,10 @@ interface Props {
   reverse?: boolean;
   visualType: "desktop" | "phones" | "isometric";
   visualImages?: ImageMetadata[];
+  placeholder?: string;
 }
 
-const { eyebrow, title, description, bullets, reverse = false, visualType, visualImages } = Astro.props;
+const { eyebrow, title, description, bullets, reverse = false, visualType, visualImages, placeholder } = Astro.props;
 
 const images: string[] = (visualImages || []).map((img) => img.src);
 ---
@@ -71,6 +72,12 @@ const images: string[] = (visualImages || []).map((img) => img.src);
         <img src={images[0]} alt="" class="absolute w-[280px] h-auto top-10 left-1/2 iso-card-1 z-[3] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" />
         <img src={images[1]} alt="" class="absolute w-[240px] h-auto top-[120px] right-0 iso-card z-[2] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" />
         <img src={images[2]} alt="" class="absolute w-[220px] h-auto bottom-10 left-5 iso-card z-[1] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" />
+      </div>
+    )}
+
+    {placeholder && !images.length && (
+      <div class="absolute inset-0 flex items-center justify-center">
+        <p class="text-white/80 text-lg font-medium">{placeholder}</p>
       </div>
     )}
   </div>

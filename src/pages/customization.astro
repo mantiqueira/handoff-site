@@ -1,0 +1,202 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import DetailRow from "@/components/sections/DetailRow.astro";
+import Button from "@/components/ui/Button.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+
+const faqItems = [
+  {
+    question: "How long does it take to set up my pricing rules and templates?",
+    answer: "Most contractors are estimating with their own rules within their first day. Set your markup logic, pricing instructions, and template preferences once — Handoff applies them from there. You can also create new presets and templates on the fly directly from chat while you're working.",
+  },
+  {
+    question: "What happens if one of my rules conflicts with another?",
+    answer: "Handoff checks presets before they run and flags any conflicts — telling you exactly what won't apply cleanly before the estimate goes out. You stay in control instead of discovering mistakes after the fact.",
+  },
+  {
+    question: "Can different team members have different templates or pricing rules?",
+    answer: "Yes. Role-based permissions let you control who can view, edit, or apply pricing rules and templates. Estimators work inside your standards without seeing your full margin logic. You see everything. Set it once and you never have to police it again.",
+  },
+  {
+    question: "Does this work for different project types, like kitchens vs. bathrooms vs full remodels?",
+    answer: "Yes. You can build separate templates and pricing rules for each type of job you run. Handoff selects the right one automatically based on context. Kitchen estimates follow kitchen standards, bathroom remodels follow bathroom standards. No manual switching.",
+  },
+];
+
+const features = [
+  {
+    eyebrow: "Smart AI presets",
+    title: "Your pricing rules, running on every project",
+    description: "Save the pricing and decision rules that define how your business operates. Your AI teammate applies them across all estimates, proposals, and change orders.",
+    bullets: [
+      "Create and save pricing presets mid-estimate",
+      "Catch rule conflicts before estimates go out",
+      "Ensure every estimate is pricing projects your way",
+    ],
+    placeholder: "Screenshot of pricing presets editor",
+  },
+  {
+    eyebrow: "Personalized templates",
+    title: "Every proposal goes out looking like you meant it",
+    description: "Create templates for every document you send — proposals, work orders, daily logs — so everything stays on brand without extra work.",
+    bullets: [
+      "Set multiple templates per document type (kitchen, bathroom, full remodel)",
+      "Send proposals instantly — no reformatting, no cleanup",
+      "Brand every document with your company's look and standards",
+    ],
+    placeholder: "Screenshot of proposal template builder",
+  },
+  {
+    eyebrow: "Custom catalogs",
+    title: "Estimates that start from your numbers",
+    description: "Standardize estimates using pricing that reflects how your business actually runs — not generic defaults.",
+    bullets: [
+      "Build your catalog from your actual supplier quotes, subcontractor bids, and cost books — not generic defaults",
+      "Automatically match catalog items to each project",
+      "Pull live pricing from Lowe's, Home Depot, and more",
+    ],
+    placeholder: "Screenshot of custom catalog manager",
+  },
+];
+
+const outcomes = [
+  {
+    title: "Consistent margins",
+    description: "Your markup logic runs automatically on estimates and change orders — no matter who builds it.",
+  },
+  {
+    title: "Faster proposals",
+    description: "Templates eliminate formatting, cleanup, and last-minute fixes before proposals go out.",
+  },
+  {
+    title: "Scalable standards",
+    description: "Your pricing and processes stay consistent as your team grows, without extra oversight.",
+  },
+];
+---
+
+<BaseLayout title="Customization — Handoff">
+  <Header navItems={navItems} />
+
+  <!-- Hero -->
+  <section class="relative z-[2] bg-brand-800 pt-32 pb-20 px-4">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div class="flex-1 flex flex-col gap-6" data-animate="fade-up">
+        <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">
+          Customization: instructions & templates
+        </p>
+        <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white">
+          Train an AI teammate to run your construction business
+        </h1>
+        <p class="text-lg lg:text-xl font-medium leading-[30px] text-text-on-brand-tertiary max-w-[560px]">
+          Stop double-checking every estimate your team sends. Built for contractors, Handoff's trained AI applies your markup rules, templates, and real pricing, so every output looks like your business, every time.
+        </p>
+        <div>
+          <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
+            See how it works
+          </Button>
+        </div>
+      </div>
+      <div class="flex-1 w-full rounded-2xl bg-brand-700/30 h-[400px] lg:h-[500px] flex items-center justify-center" data-animate="fade-up">
+        <p class="text-white/80 text-lg font-medium">Screenshot of AI customization interface</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes -->
+  <section class="relative z-[2] px-4 pb-2 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24 overflow-hidden flex flex-col gap-12 lg:gap-20">
+      <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8" data-animate="stagger">
+        {outcomes.map((o) => (
+          <div class="bg-bg-secondary rounded-xl p-6 flex flex-col gap-6">
+            <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">{o.title}</h3>
+            <p class="text-lg font-normal leading-7 text-text-tertiary">{o.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="relative z-[2] px-4 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-12 overflow-hidden">
+      <div class="bg-bg-secondary rounded-xl p-8 lg:p-12 flex flex-col gap-8 mx-6 lg:mx-8 max-w-[calc(1440px-64px)] w-[calc(100%-48px)] lg:w-[calc(100%-64px)] self-center" data-animate="fade-up">
+        <blockquote class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary">
+          "Once you get the AI trained to your preferred formats, it makes things much easier than having to manually input all information individually."
+        </blockquote>
+        <div class="flex flex-col gap-1">
+          <p class="text-lg font-semibold leading-7 text-text-primary">— Corey N.</p>
+          <p class="text-base font-normal leading-6 text-text-tertiary">Estimator, Retail & Insurance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Strip -->
+  <section class="relative z-[2] px-4 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-12 overflow-hidden">
+      <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8" data-animate="stagger">
+        <div class="text-center flex flex-col gap-2">
+          <p class="font-display text-4xl font-medium text-text-primary">Zero delays</p>
+          <p class="text-base text-text-tertiary">From first contact to signed proposal</p>
+        </div>
+        <div class="text-center flex flex-col gap-2">
+          <p class="font-display text-4xl font-medium text-text-primary">10x</p>
+          <p class="text-base text-text-tertiary">Faster estimates vs. manual methods</p>
+        </div>
+        <div class="text-center flex flex-col gap-2">
+          <p class="font-display text-4xl font-medium text-text-primary">60M+</p>
+          <p class="text-base text-text-tertiary">SKUs tracked across major suppliers</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="relative z-[2] px-4 pb-2 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+      <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full flex flex-col gap-5 mb-4" data-animate="fade-up">
+        <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-4xl">
+          Every output reflects your business — without you checking it
+        </h2>
+      </div>
+      {features.map((f, i) => (
+        <DetailRow
+          eyebrow={f.eyebrow}
+          title={f.title}
+          description={f.description}
+          bullets={f.bullets}
+          reverse={i % 2 !== 0}
+          visualType="desktop"
+          placeholder={f.placeholder}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="relative z-[2] px-4 py-16 bg-brand-800 text-center">
+    <div class="max-w-[640px] mx-auto flex flex-col items-center gap-6" data-animate="fade-up">
+      <h2 class="font-display text-3xl lg:text-4xl font-medium leading-[44px] tracking-[-0.72px] text-white">
+        Your rules. Your templates. Your AI teammate.
+      </h2>
+      <p class="text-lg font-medium leading-[30px] text-text-on-brand-tertiary">
+        Build your company playbook into the platform, and let Handoff make sure every estimate, scope, and proposal that goes out reflects how you actually run your business.
+      </p>
+      <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
+        See how it works
+      </Button>
+    </div>
+  </section>
+
+  <FaqSection items={faqItems} />
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+  initScrollAnimations();
+</script>

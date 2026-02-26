@@ -1,0 +1,197 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import DetailRow from "@/components/sections/DetailRow.astro";
+import Button from "@/components/ui/Button.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+
+const faqItems = [
+  {
+    question: "Can I customize permissions beyond the default roles?",
+    answer: "Yes. Default roles cover the most common contractor team structures out of the box. Permissions can be adjusted per role across every feature category if your team needs something different.",
+  },
+  {
+    question: "What happens if I need to change someone's role?",
+    answer: "Role changes can be made anytime from the team members screen and take effect immediately. The team members view updates as soon as the change is saved.",
+  },
+  {
+    question: "Can a team member see projects they aren't assigned to?",
+    answer: "No. Non-admin roles only see the projects they're directly assigned to. If they have no assigned projects, they see a clear empty state — not a full project list.",
+  },
+  {
+    question: "Does the AI respect permissions, too?",
+    answer: "Yes. Handoff's trained AI only works with data the user can already see. It cannot access, return, or expose information outside that user's permission level — including financial data, pricing, and account settings.",
+  },
+  {
+    question: "Can sales reps see each other's leads?",
+    answer: "No. Project visibility is individual and assignment-based, not shared across roles. Sales reps only see the projects and clients they're directly assigned to.",
+  },
+  {
+    question: "Is this relevant for solo operators?",
+    answer: "Permissions and roles are built for growing, multi-user teams. It becomes valuable the moment you bring on your first PM, sales rep, or field crew member, and more valuable every time you add a seat after that.",
+  },
+];
+
+const features = [
+  {
+    eyebrow: "Role assignment",
+    title: "The right access from day one",
+    description: "Invite a team member, assign a role, and they're ready to work. Each role gets a clean view built around their project, nothing extra.",
+    bullets: [
+      "Four contractor-specific default roles: admin, project manager, sales rep/estimator, field crew",
+      "Role changes apply instantly from the team members screen",
+      "Each team member has one global role — clean, simple, no overlap",
+    ],
+    placeholder: "Screenshot of role assignment interface",
+  },
+  {
+    eyebrow: "Project visibility",
+    title: "Your team sees their work. Your data stays yours.",
+    description: "Project access is assignment-based. Every role sees exactly what they're responsible for and nothing else.",
+    bullets: [
+      "Non-admin roles view only assigned projects, never all projects by default",
+      "Sales reps don't see each other's leads — access is individual, not shared by role",
+      "If access is removed mid-project, users are redirected immediately with a clear message",
+    ],
+    placeholder: "Screenshot of project visibility settings",
+  },
+  {
+    eyebrow: "Permissions matrix",
+    title: "Control exactly who can view, edit, or delete",
+    description: "Not every role needs full access. Set permissions once and let your team collaborate confidently, without accidental changes or risky workarounds.",
+    bullets: [
+      "Every part of the platform is covered — from estimates and invoices to client records and AI settings",
+      "Read-only mode when edit access is off — no accidental changes, no confusion",
+      "Delete actions are hidden for roles that don't need them and blocked at the system level",
+    ],
+    placeholder: "Screenshot of permissions matrix",
+  },
+  {
+    eyebrow: "Lead pipeline",
+    title: "See every opportunity — before it becomes a project",
+    description: "Sales reps get a built-in lead pipeline, so every opportunity is tracked from first contact to active project.",
+    bullets: [
+      "Capture contact details, referral source, and notes without creating a full project",
+      "Kanban pipeline shows what's new, active, and needs follow-up",
+      "Every lead stays visible until it becomes an active project",
+    ],
+    placeholder: "Screenshot of lead pipeline",
+  },
+  {
+    eyebrow: "AI controls",
+    title: "Your controls hold everywhere — including the AI",
+    description: "Your AI teammate only works with data that users can already see. It can't access, share, or export anything you don't want it to.",
+    bullets: [
+      "No pricing, margin, or financial data leaks through AI chat or exports",
+      "If someone asks for restricted information, the AI says no",
+      "The same permissions that protect your platform protect your AI output",
+    ],
+    placeholder: "Screenshot of AI controls settings",
+  },
+];
+
+const outcomes = [
+  {
+    title: "Protect your numbers",
+    description: "Margins, pricing, and invoices stay locked down by role — no leaks, no workarounds.",
+  },
+  {
+    title: "Show only what matters",
+    description: "When people only see what they need, projects move faster and mistakes drop.",
+  },
+  {
+    title: "Scale without risk",
+    description: "Bring your whole team into Handoff with confidence, knowing every role is protected from day one.",
+  },
+];
+---
+
+<BaseLayout title="Permissions & roles — Handoff">
+  <Header navItems={navItems} />
+
+  <!-- Hero -->
+  <section class="relative z-[2] bg-brand-800 pt-32 pb-20 px-4">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div class="flex-1 flex flex-col gap-6" data-animate="fade-up">
+        <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">
+          Permissions & roles
+        </p>
+        <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white">
+          Grow your team. Keep control of your business.
+        </h1>
+        <p class="text-lg lg:text-xl font-medium leading-[30px] text-text-on-brand-tertiary max-w-[560px]">
+          Add project managers, sales reps, and field crews with confidence. Handoff's trained AI gives every role exactly what they need — while keeping your pricing, costs, and margins locked down.
+        </p>
+        <div>
+          <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
+            See how it works
+          </Button>
+        </div>
+      </div>
+      <div class="flex-1 w-full rounded-2xl bg-brand-700/30 h-[400px] lg:h-[500px] flex items-center justify-center" data-animate="fade-up">
+        <p class="text-white/80 text-lg font-medium">Screenshot of permissions dashboard</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes -->
+  <section class="relative z-[2] px-4 pb-2 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24 overflow-hidden flex flex-col gap-12 lg:gap-20">
+      <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8" data-animate="stagger">
+        {outcomes.map((o) => (
+          <div class="bg-bg-secondary rounded-xl p-6 flex flex-col gap-6">
+            <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">{o.title}</h3>
+            <p class="text-lg font-normal leading-7 text-text-tertiary">{o.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="relative z-[2] px-4 pb-2 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+      <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full flex flex-col gap-5 mb-4" data-animate="fade-up">
+        <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-4xl">
+          A clean view for every role
+        </h2>
+      </div>
+      {features.map((f, i) => (
+        <DetailRow
+          eyebrow={f.eyebrow}
+          title={f.title}
+          description={f.description}
+          bullets={f.bullets}
+          reverse={i % 2 !== 0}
+          visualType="desktop"
+          placeholder={f.placeholder}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="relative z-[2] px-4 py-16 bg-brand-800 text-center">
+    <div class="max-w-[640px] mx-auto flex flex-col items-center gap-6" data-animate="fade-up">
+      <h2 class="font-display text-3xl lg:text-4xl font-medium leading-[44px] tracking-[-0.72px] text-white">
+        Add seats with confidence. Your numbers stay protected.
+      </h2>
+      <p class="text-lg font-medium leading-[30px] text-text-on-brand-tertiary">
+        Bring PMs, sales reps, estimators, and field crews into Handoff — knowing your margins, invoices, and settings stay exactly where they belong.
+      </p>
+      <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
+        See how it works
+      </Button>
+    </div>
+  </section>
+
+  <FaqSection items={faqItems} />
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+  initScrollAnimations();
+</script>

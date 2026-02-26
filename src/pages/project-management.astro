@@ -1,0 +1,200 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import DetailRow from "@/components/sections/DetailRow.astro";
+import Button from "@/components/ui/Button.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+
+const faqItems = [
+  {
+    question: "How does Handoff's trained AI handle change orders?",
+    answer: "Change orders are created directly in the platform, tracked automatically, and connected to the original estimate. You can see how changes affect the budget and timeline in real-time.",
+  },
+  {
+    question: "Can my whole team use it?",
+    answer: "Yes. You control who sees what through role-based permissions. Crew members see their schedules, project managers see project details, and you see everything.",
+  },
+  {
+    question: "Will this work when I'm running multiple projects?",
+    answer: "Yes. Handoff is built to help you scale. The more projects you run, the more valuable the automated coordination becomes. You can manage 3x more projects when you delegate admin work to your AI teammate.",
+  },
+  {
+    question: 'How does "crew scheduling" work?',
+    answer: "You set crew availability and project phases. Handoff's trained AI coordinates schedules, sends notifications, and alerts you to conflicts automatically.",
+  },
+  {
+    question: "Can I customize it for how my business works?",
+    answer: "You can set up approval rules, authorization levels, and workflows that match how you actually run projects.",
+  },
+];
+
+const features = [
+  {
+    eyebrow: "AI-powered contract & documentation",
+    title: "No more chasing signed contracts",
+    description: "Proposals, invoices, and payments integrate without question. Get signatures faster so you're ready to build.",
+    bullets: [
+      "Blueprint takeoffs and site walkthroughs flow into estimates, estimates into contracts, contracts into schedules, milestones into invoices — one connected system",
+      "Change orders tracked from field request through approval to invoice adjustment and payment",
+      "Every project document in one place — takeoff blueprints and PDFs, site photos, contracts, change orders, invoices, and payment records",
+    ],
+    placeholder: "Screenshot of contract and documentation workflow",
+  },
+  {
+    eyebrow: "Intelligent crew scheduling",
+    title: "Everyone knows where to be and when",
+    description: "No more coordinating crews through text messages. Have your AI teammate help you set up schedules once, so everyone stays in the loop.",
+    bullets: [
+      "Everyone's schedule in one calendar",
+      "Crew schedules and walkthroughs are coordinated automatically",
+      "Everyone gets notified when schedules change",
+      "Your phone stops buzzing with scheduling questions",
+    ],
+    placeholder: "Screenshot of crew scheduling calendar",
+  },
+  {
+    eyebrow: "Real-time project alerts",
+    title: "Catch problems before they hurt your timeline",
+    description: "Track every detail from blueprint takeoffs to final walkthrough, then get alerted the second something needs attention.",
+    bullets: [
+      "Know when approvals are stuck before clients start asking questions",
+      "Payment reminders so you don't have to chase money",
+      "Handle change orders before they cause delays",
+      "Spot crew conflicts, material shortages, and timeline risks while there's still time to fix them",
+    ],
+    placeholder: "Screenshot of real-time project alerts",
+  },
+  {
+    eyebrow: "Role-based permissions",
+    title: "Keep your business information safe",
+    description: "Keep control of your business as your team grows. You decide who can see what, so the right people have access to the right information without oversight.",
+    bullets: [
+      "Crews see their schedules, not your markup",
+      "Project managers see what they need to manage projects",
+      "Only authorized team members see markup and margin data",
+      "Set it once, never worry about information leaks",
+    ],
+    placeholder: "Screenshot of role-based permissions settings",
+  },
+];
+
+const outcomes = [
+  {
+    title: "Keep projects organized",
+    description: "Every contract, change order, and document in one place. No more hunting through excel sheets for approvals. Proposals turn into payments seamlessly.",
+  },
+  {
+    title: "Cut admin time in half",
+    description: "Change orders stay organized without the extra work. Your AI teammate learns your way of doing things and handles it on every project.",
+  },
+  {
+    title: "Scale without the bottleneck",
+    description: "Scale up without being in three places at once. Delegate the admin work to your AI teammate and focus on building.",
+  },
+];
+---
+
+<BaseLayout title="Project management — Handoff">
+  <Header navItems={navItems} />
+
+  <!-- Hero -->
+  <section class="relative z-[2] bg-brand-800 pt-32 pb-20 px-4">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div class="flex-1 flex flex-col gap-6" data-animate="fade-up">
+        <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">
+          Construction-trained AI for end-to-end project management
+        </p>
+        <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white">
+          Run more projects without more admin
+        </h1>
+        <p class="text-lg lg:text-xl font-medium leading-[30px] text-text-on-brand-tertiary max-w-[560px]">
+          Spend your time building and growing your business instead of chasing project details. Built for contractors, Handoff's trained AI manages all the documentation, scheduling, and crew coordination in one system, acting like your AI teammate.
+        </p>
+        <div>
+          <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
+            See how it works
+          </Button>
+        </div>
+      </div>
+      <div class="flex-1 w-full rounded-2xl bg-brand-700/30 h-[400px] lg:h-[500px] flex items-center justify-center" data-animate="fade-up">
+        <p class="text-white/80 text-lg font-medium">Screenshot of project dashboard</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes -->
+  <section class="relative z-[2] px-4 pb-2 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24 overflow-hidden flex flex-col gap-12 lg:gap-20">
+      <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8" data-animate="stagger">
+        {outcomes.map((o) => (
+          <div class="bg-bg-secondary rounded-xl p-6 flex flex-col gap-6">
+            <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">{o.title}</h3>
+            <p class="text-lg font-normal leading-7 text-text-tertiary">{o.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="relative z-[2] px-4 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-12 overflow-hidden">
+      <div class="bg-bg-secondary rounded-xl p-8 lg:p-12 flex flex-col gap-8 mx-6 lg:mx-8 max-w-[calc(1440px-64px)] w-[calc(100%-48px)] lg:w-[calc(100%-64px)] self-center" data-animate="fade-up">
+        <blockquote class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary">
+          "Handoff has streamlined a lot of my workflow. I really appreciate how everything is in one place, making communication and tracking progress much easier."
+        </blockquote>
+        <div class="flex flex-col gap-1">
+          <p class="text-lg font-semibold leading-7 text-text-primary">— Amanda M.</p>
+          <p class="text-base font-normal leading-6 text-text-tertiary">Owner/Project Manager</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="relative z-[2] px-4 pb-2 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+      <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full flex flex-col gap-5 mb-4" data-animate="fade-up">
+        <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-4xl">
+          Run projects in one connected system
+        </h2>
+      </div>
+      {features.map((f, i) => (
+        <DetailRow
+          eyebrow={f.eyebrow}
+          title={f.title}
+          description={f.description}
+          bullets={f.bullets}
+          reverse={i % 2 !== 0}
+          visualType="desktop"
+          placeholder={f.placeholder}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="relative z-[2] px-4 py-16 bg-brand-800 text-center">
+    <div class="max-w-[640px] mx-auto flex flex-col items-center gap-6" data-animate="fade-up">
+      <h2 class="font-display text-3xl lg:text-4xl font-medium leading-[44px] tracking-[-0.72px] text-white">
+        Ready to run more projects without the headaches?
+      </h2>
+      <p class="text-lg font-medium leading-[30px] text-text-on-brand-tertiary">
+        See how modern contractors delegate work and grow faster with a construction-trained AI teammate.
+      </p>
+      <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
+        Request a demo
+      </Button>
+    </div>
+  </section>
+
+  <FaqSection items={faqItems} />
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+  initScrollAnimations();
+</script>

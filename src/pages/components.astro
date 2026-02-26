@@ -1,0 +1,446 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+// Section components
+import Header from "@/components/sections/Header.astro";
+import FeaturesSection from "@/components/sections/FeaturesSection.astro";
+import DetailRow from "@/components/sections/DetailRow.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import Footer from "@/components/sections/Footer.astro";
+
+// UI components
+import Button from "@/components/ui/Button.astro";
+import Logo from "@/components/ui/Logo.astro";
+import AppBadge from "@/components/ui/AppBadge.astro";
+import BulletIcon from "@/components/ui/BulletIcon.astro";
+import StarIcon from "@/components/ui/StarIcon.astro";
+import ChevronDown from "@/components/ui/ChevronDown.astro";
+
+// Real data from the site
+import { navItems, footerColumns, faqItems } from "@/lib/navigation";
+
+const sectionComponents = [
+  { id: "header", name: "Header" },
+  { id: "hero-section", name: "HeroSection" },
+  { id: "features-section", name: "FeaturesSection" },
+  { id: "detail-row", name: "DetailRow" },
+  { id: "testimonial-card", name: "TestimonialCard" },
+  { id: "faq-section", name: "FaqSection" },
+  { id: "footer", name: "Footer" },
+];
+
+const uiComponents = [
+  { id: "button", name: "Button" },
+  { id: "logo", name: "Logo" },
+  { id: "app-badge", name: "AppBadge" },
+  { id: "bullet-icon", name: "BulletIcon" },
+  { id: "star-icon", name: "StarIcon" },
+  { id: "chevron-down", name: "ChevronDown" },
+];
+---
+
+<BaseLayout title="Component Browser — Handoff">
+  <div class="flex min-h-screen bg-white">
+    <!-- Sidebar -->
+    <nav class="comp-sidebar">
+      <a href="/" class="text-sm text-gray-500 hover:text-gray-900 mb-4 block">&larr; Back to site</a>
+      <h1 class="text-lg font-semibold text-gray-900 mb-4">Components</h1>
+
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Pages</h2>
+      <ul class="mb-6 space-y-1">
+        <li><a href="/project-management" class="block text-sm text-gray-600 hover:text-gray-900 py-1">Project management</a></li>
+        <li><a href="/permissions-roles" class="block text-sm text-gray-600 hover:text-gray-900 py-1">Permissions & roles</a></li>
+        <li><a href="/customization" class="block text-sm text-gray-600 hover:text-gray-900 py-1">Customization</a></li>
+        <li><a href="/financial-management" class="block text-sm text-gray-600 hover:text-gray-900 py-1">Financial management</a></li>
+      </ul>
+
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Sections</h2>
+      <ul class="mb-6 space-y-1">
+        {sectionComponents.map((c) => (
+          <li>
+            <a href={`#${c.id}`} class="block text-sm text-gray-600 hover:text-gray-900 py-1">{c.name}</a>
+          </li>
+        ))}
+      </ul>
+
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">UI</h2>
+      <ul class="space-y-1">
+        {uiComponents.map((c) => (
+          <li>
+            <a href={`#${c.id}`} class="block text-sm text-gray-600 hover:text-gray-900 py-1">{c.name}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Main content -->
+    <main class="ml-60 flex-1">
+
+      <!-- ===================== SECTION COMPONENTS ===================== -->
+
+      <!-- Header -->
+      <div id="header" class="comp-block scroll-mt-0">
+        <div class="comp-label">Header</div>
+        <div class="comp-header-wrap relative bg-brand-800" style="min-height: 80px;">
+          <Header navItems={navItems} />
+        </div>
+      </div>
+
+      <!-- HeroSection -->
+      <div id="hero-section" class="comp-block scroll-mt-0">
+        <div class="comp-label">HeroSection</div>
+        <div class="relative bg-brand-800 overflow-hidden pt-32 pb-20 px-4">
+          <div class="max-w-[1440px] mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <div class="flex-1 flex flex-col gap-6">
+              <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">
+                Construction-trained AI for sales and lead intake
+              </p>
+              <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white">
+                Never lose money to slow estimates
+              </h1>
+              <p class="text-lg lg:text-xl font-medium leading-[30px] text-text-on-brand-tertiary max-w-[560px]">
+                Turn site visits into signed contracts faster than any competitor. Handoff captures every lead and generates complete estimates using trained AI built for construction.
+              </p>
+              <div>
+                <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
+                  See how it works
+                </Button>
+              </div>
+            </div>
+            <div class="flex-1 w-full rounded-2xl bg-brand-700/30 h-[400px] lg:h-[500px] flex items-center justify-center">
+              <p class="text-white/80 text-lg font-medium">Screenshot of Handoff dashboard</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FeaturesSection -->
+      <div id="features-section" class="comp-block scroll-mt-0">
+        <div class="comp-label">FeaturesSection</div>
+        <div class="bg-brand-800">
+          <FeaturesSection />
+        </div>
+      </div>
+
+      <!-- DetailRow -->
+      <div id="detail-row" class="comp-block scroll-mt-0">
+        <div class="comp-label">DetailRow</div>
+        <div class="bg-brand-800">
+          <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+            <DetailRow
+              eyebrow="Lead intake & pipeline"
+              title="Never lose an opportunity"
+              description="Walk the job site, snap photos, talk into your phone, done. Every detail gets captured, even when you're juggling ten different jobs."
+              bullets={["Your phone becomes your intake system", "Every photo, video, and note is automatically organized", "See all your leads at a glance, know exactly where each one stands"]}
+              visualType="desktop"
+              placeholder="Screenshot of lead intake dashboard"
+            />
+            <DetailRow
+              eyebrow="Rapid AI estimating"
+              title="Go from site visit to estimate, fast"
+              description="Stop spending your evenings on estimates. Start your walkthrough, describe what you see, take photos, and get a complete estimate before you're back in your truck."
+              bullets={["Uses your pricing rules, not generic markup", "Applies material costs from actual suppliers in your area", "Trained on 100,000+ real contractor data"]}
+              reverse={true}
+              visualType="desktop"
+              placeholder="Screenshot of estimate generation interface"
+            />
+            <DetailRow
+              eyebrow="Automated professional proposals"
+              title="Turn estimates into branded proposals with one click"
+              description="While your competition is still figuring out their pricing, you're already in the client's inbox."
+              bullets={["Detailed professional proposals that wow your clients", "Your branding, your pricing, and your way of doing business"]}
+              visualType="desktop"
+              placeholder="Screenshot of proposal builder"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- TestimonialCard -->
+      <div id="testimonial-card" class="comp-block scroll-mt-0">
+        <div class="comp-label">TestimonialCard</div>
+        <div class="bg-white py-12">
+          <div class="bg-bg-secondary rounded-xl p-8 lg:p-12 flex flex-col gap-8 mx-6 lg:mx-8 max-w-[calc(1440px-64px)] w-[calc(100%-48px)] lg:w-[calc(100%-64px)]">
+            <div class="flex items-center gap-4">
+              <div class="flex gap-1">
+                <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
+              </div>
+              <span class="text-base font-medium text-text-quaternary">5/5</span>
+            </div>
+            <blockquote class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary">
+              "Handoff has turned <span class="text-brand-accent">3-hour estimates into 20-minute estimates</span> ... I give a project scope, any plans and pictures, and it creates the entire estimate for me."
+            </blockquote>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-16">
+              <div class="flex flex-col gap-1">
+                <p class="text-lg font-semibold leading-7 text-text-primary">— Benjamin B.</p>
+                <p class="text-base font-normal leading-6 text-text-tertiary">Acting Construction Manager</p>
+              </div>
+              <Button variant="secondary-outline">View more testimonials</Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FaqSection -->
+      <div id="faq-section" class="comp-block scroll-mt-0">
+        <div class="comp-label">FaqSection</div>
+        <div class="bg-brand-800">
+          <FaqSection items={faqItems} />
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div id="footer" class="comp-block scroll-mt-0">
+        <div class="comp-label">Footer</div>
+        <div class="bg-brand-800">
+          <Footer columns={footerColumns} />
+        </div>
+      </div>
+
+      <!-- ===================== UI COMPONENTS ===================== -->
+
+      <div class="px-10 py-16 border-t-2 border-gray-200 bg-white relative z-10">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-12">UI Components</h2>
+
+        <!-- Button -->
+        <div id="button" class="comp-ui-block scroll-mt-8">
+          <h3 class="comp-ui-label">Button</h3>
+          <!-- As used in Hero CTA -->
+          <div class="bg-brand-800 rounded-2xl p-10 mb-6">
+            <div class="flex flex-col gap-3 mb-6">
+              <p class="font-mono text-xs text-white/40 uppercase tracking-wider">Hero CTA</p>
+              <h2 class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-white">Never lose money to slow estimates</h2>
+            </div>
+            <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#414651" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M10 8L16 12L10 16V8Z" fill="#414651" />
+              </svg>
+              See how it works
+            </Button>
+          </div>
+          <!-- As used in DetailRow -->
+          <div class="bg-white rounded-2xl border border-gray-200 p-10 mb-6">
+            <p class="font-mono text-xs text-gray-400 uppercase tracking-wider mb-4">DetailRow CTA</p>
+            <Button variant="secondary-outline">Get started</Button>
+          </div>
+          <!-- As used in TestimonialCard -->
+          <div class="bg-bg-secondary rounded-2xl p-10 mb-6">
+            <p class="font-mono text-xs text-gray-400 uppercase tracking-wider mb-4">Testimonial CTA</p>
+            <Button variant="secondary-outline">View more testimonials</Button>
+          </div>
+          <!-- Header actions -->
+          <div class="bg-brand-800 rounded-2xl p-10">
+            <p class="font-mono text-xs text-white/40 uppercase tracking-wider mb-4">Header actions</p>
+            <div class="flex items-center gap-3">
+              <button class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white/10 border border-white/20 text-white hover:bg-white/[0.18]">
+                Log in
+              </button>
+              <button class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white text-brand-700 hover:bg-white/90">
+                Sign up
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logo -->
+        <div id="logo" class="comp-ui-block scroll-mt-8">
+          <h3 class="comp-ui-label">Logo</h3>
+          <!-- As in Header -->
+          <div class="bg-brand-800 rounded-2xl p-10 mb-6">
+            <p class="font-mono text-xs text-white/40 uppercase tracking-wider mb-4">In Header</p>
+            <a href="/" class="flex items-start h-8 pb-2">
+              <Logo />
+            </a>
+          </div>
+          <!-- As in Footer -->
+          <div class="bg-brand-800 rounded-2xl p-10 border-t border-white/10">
+            <p class="font-mono text-xs text-white/40 uppercase tracking-wider mb-4">In Footer</p>
+            <div class="flex items-center justify-between pt-6 border-t border-white/10">
+              <a href="/" class="flex items-start h-8 pb-2">
+                <Logo />
+              </a>
+              <p class="text-base font-normal leading-6 text-text-on-brand-secondary">
+                &copy; 2025 Handoff. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AppBadge -->
+        <div id="app-badge" class="comp-ui-block scroll-mt-8">
+          <h3 class="comp-ui-label">AppBadge</h3>
+          <!-- As in Footer "Get the app" column -->
+          <div class="bg-brand-800 rounded-2xl p-10">
+            <p class="font-mono text-xs text-white/40 uppercase tracking-wider mb-4">Footer — "Get the app"</p>
+            <div class="flex flex-col gap-4 max-w-[160px]">
+              <h4 class="text-sm font-semibold leading-5 text-white">Get the app</h4>
+              <AppBadge store="apple" />
+              <AppBadge store="google" />
+            </div>
+          </div>
+        </div>
+
+        <!-- BulletIcon -->
+        <div id="bullet-icon" class="comp-ui-block scroll-mt-8">
+          <h3 class="comp-ui-label">BulletIcon</h3>
+          <!-- As in DetailRow bullet list -->
+          <div class="bg-white rounded-2xl border border-gray-200 p-10">
+            <p class="font-mono text-xs text-gray-400 uppercase tracking-wider mb-6">DetailRow bullet list</p>
+            <ul class="flex flex-col gap-4">
+              <li class="flex items-start gap-2 text-lg font-medium leading-7 text-text-quaternary">
+                <BulletIcon />
+                Your phone becomes your intake system
+              </li>
+              <li class="flex items-start gap-2 text-lg font-medium leading-7 text-text-quaternary">
+                <BulletIcon />
+                Every photo, video, and note is automatically organized
+              </li>
+              <li class="flex items-start gap-2 text-lg font-medium leading-7 text-text-quaternary">
+                <BulletIcon />
+                See all your leads at a glance, know exactly where each one stands
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- StarIcon -->
+        <div id="star-icon" class="comp-ui-block scroll-mt-8">
+          <h3 class="comp-ui-label">StarIcon</h3>
+          <!-- As in TestimonialCard header -->
+          <div class="bg-bg-secondary rounded-2xl p-10">
+            <p class="font-mono text-xs text-gray-400 uppercase tracking-wider mb-6">TestimonialCard rating</p>
+            <div class="flex items-center gap-4">
+              <div class="w-6 h-6 rounded-full overflow-hidden bg-gray-300"></div>
+              <div class="flex gap-1">
+                <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
+              </div>
+              <span class="text-base font-medium text-text-quaternary">5/5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ChevronDown -->
+        <div id="chevron-down" class="comp-ui-block scroll-mt-8">
+          <h3 class="comp-ui-label">ChevronDown</h3>
+          <!-- As in Header nav dropdown -->
+          <div class="bg-brand-800 rounded-2xl p-10 mb-6">
+            <p class="font-mono text-xs text-white/40 uppercase tracking-wider mb-4">Header nav dropdown</p>
+            <div class="flex items-center gap-2">
+              <button class="flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 text-white/70 rounded-md hover:bg-white/10 hover:text-white">
+                <span class="px-0.5">Who We Serve</span>
+                <ChevronDown />
+              </button>
+              <button class="flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 text-white/70 rounded-md hover:bg-white/10 hover:text-white">
+                <span class="px-0.5">Solutions</span>
+                <ChevronDown />
+              </button>
+              <button class="flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 text-white/70 rounded-md hover:bg-white/10 hover:text-white">
+                <span class="px-0.5">Resources</span>
+                <ChevronDown />
+              </button>
+            </div>
+          </div>
+          <!-- As in FAQ accordion -->
+          <div class="bg-white rounded-2xl border border-gray-200 p-10">
+            <p class="font-mono text-xs text-gray-400 uppercase tracking-wider mb-6">FAQ accordion toggle</p>
+            <div class="flex flex-col gap-4">
+              <details class="group" open>
+                <summary class="flex items-start justify-between gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <span class="text-base font-semibold leading-6 text-text-primary">How accurate are AI-generated estimates?</span>
+                  <svg class="shrink-0 w-6 h-6 transition-transform duration-200 group-open:rotate-45" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="#535862" stroke-width="2" />
+                    <path d="M8 12H16" stroke="#535862" stroke-width="2" stroke-linecap="round" />
+                    <path d="M12 8V16" stroke="#535862" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                </summary>
+                <p class="text-base font-normal leading-6 text-text-tertiary mt-1 pr-10">
+                  Handoff learns from your past projects and pricing rules, so estimates match how you actually build and price work. The more you use it, the smarter it gets.
+                </p>
+              </details>
+              <details class="group">
+                <summary class="flex items-start justify-between gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <span class="text-base font-semibold leading-6 text-text-primary">Can I customize proposals and templates?</span>
+                  <svg class="shrink-0 w-6 h-6 transition-transform duration-200 group-open:rotate-45" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="#535862" stroke-width="2" />
+                    <path d="M8 12H16" stroke="#535862" stroke-width="2" stroke-linecap="round" />
+                    <path d="M12 8V16" stroke="#535862" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                </summary>
+                <p class="text-base font-normal leading-6 text-text-tertiary mt-1 pr-10">
+                  Yes. Every proposal uses your branding, your pricing structure, and your preferred layout. You control what clients see.
+                </p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  body {
+    background-color: white !important;
+  }
+
+  .comp-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid #e5e7eb;
+    background: #f9fafb;
+    padding: 24px;
+    z-index: 50;
+  }
+
+  .comp-block {
+    position: relative;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .comp-label {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 40;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: ui-monospace, monospace;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .comp-ui-block {
+    margin-bottom: 48px;
+  }
+
+  .comp-ui-label {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 16px;
+  }
+
+  /* Contain the fixed-position header inside its wrapper */
+  .comp-header-wrap :global(#site-header) {
+    position: relative !important;
+  }
+  .comp-header-wrap :global(#site-header > div) {
+    justify-content: center !important;
+  }
+  .comp-header-wrap :global(#site-header nav) {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+  }
+</style>
